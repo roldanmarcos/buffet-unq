@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ivuvvgmfoewj"]
+
+[ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="1_7oqee"]
+[ext_resource type="Script" uid="uid://c1orqbe2ge3eu" path="res://src/entities/costumer/Costumer.gd" id="1_ow63a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amk08"]
+size = Vector2(126, 281)
+
+[node name="Costumer" type="Node2D" unique_id=40752684]
+script = ExtResource("1_ow63a")
+order_icon = ExtResource("1_7oqee")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=332190992]
+texture = ExtResource("1_7oqee")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=744916778]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1814118372]
+position = Vector2(0, -76.5)
+shape = SubResource("RectangleShape2D_amk08")
+
+[node name="PatienceBar" type="ProgressBar" parent="." unique_id=155143496]
+offset_left = -2.0
+offset_top = 67.0
+offset_right = 2.0
+offset_bottom = 94.0
+
+[node name="Bubble" type="Node2D" parent="." unique_id=1408409791]
+
+[node name="Background" type="Sprite2D" parent="Bubble" unique_id=333098867]
+position = Vector2(0, -98)
+scale = Vector2(1.015625, 0.4453125)
+texture = ExtResource("1_7oqee")
+
+[node name="Icon" type="Sprite2D" parent="Bubble" unique_id=2007132207]
+position = Vector2(-1, -98)
+scale = Vector2(0.34375, 0.265625)
+texture = ExtResource("1_7oqee")

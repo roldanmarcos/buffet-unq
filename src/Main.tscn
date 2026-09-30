@@ -1,16 +1,26 @@
 [gd_scene format=3 uid="uid://dg1p3d1gphkb4"]
 
 [ext_resource type="PackedScene" uid="uid://cdd0lph7gofww" path="res://src/entities/player/Player.tscn" id="1_4gxt3"]
+[ext_resource type="Script" uid="uid://j38kfx4hoaf7" path="res://src/Main.gd" id="1_vjwby"]
 [ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/Mesada.tscn" id="2_hk4rc"]
 [ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
+[ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/costumer/Costumer.tscn" id="4_5qjmp"]
 
 [node name="Main" type="Node" unique_id=1223696925]
+script = ExtResource("1_vjwby")
+customer_scene = ExtResource("4_5qjmp")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
-position = Vector2(690, 113)
+position = Vector2(819, 109)
 
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
-position = Vector2(218, 320)
+position = Vector2(265, 139)
 
 [node name="Mesada" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
-position = Vector2(644, 459)
+position = Vector2(644, 383)
+
+[node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
+position = Vector2(1179, 633)
+
+[node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
+position = Vector2(499, 493)
