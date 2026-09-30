@@ -1,3 +1,16 @@
 [gd_scene format=3 uid="uid://dg1p3d1gphkb4"]
 
+[ext_resource type="PackedScene" uid="uid://cdd0lph7gofww" path="res://src/entities/player/Player.tscn" id="1_4gxt3"]
+[ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/Mesada.tscn" id="2_hk4rc"]
+[ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
+
 [node name="Main" type="Node" unique_id=1223696925]
+
+[node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
+position = Vector2(218, 320)
+
+[node name="Mesada" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
+position = Vector2(644, 459)
+
+[node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
+position = Vector2(690, 113)

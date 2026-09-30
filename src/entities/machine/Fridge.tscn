@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://h8k21cixa72m"]
+
+[ext_resource type="Script" uid="uid://chssvjuy3oblt" path="res://src/entities/machine/Fridge.gd" id="1_olqe0"]
+[ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="2_t37fl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
+size = Vector2(84, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qjmp"]
+size = Vector2(86, 241)
+
+[node name="Fridge" type="StaticBody2D" unique_id=940246524]
+script = ExtResource("1_olqe0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=915455090]
+scale = Vector2(0.6796875, 1.765625)
+texture = ExtResource("2_t37fl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=136802334]
+shape = SubResource("RectangleShape2D_t37fl")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=680347414]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1456946751]
+position = Vector2(1, 8.5)
+shape = SubResource("RectangleShape2D_5qjmp")

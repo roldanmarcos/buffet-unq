@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c5ftgosx7v8xq"]
+
+[ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="1_jnb03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnb03"]
+size = Vector2(440, 86)
+
+[node name="Mesada" type="StaticBody2D" unique_id=110983076]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=841627255]
+scale = Vector2(3.432617, 0.671875)
+texture = ExtResource("1_jnb03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=273927644]
+shape = SubResource("RectangleShape2D_jnb03")
