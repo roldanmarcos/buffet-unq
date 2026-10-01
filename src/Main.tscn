@@ -26,7 +26,7 @@ position = Vector2(265, 139)
 position = Vector2(644, 383)
 
 [node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
-position = Vector2(1179, 633)
+position = Vector2(1181, 583)
 
 [node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
 position = Vector2(499, 493)

@@ -1,10 +1,11 @@
 extends Node2D
 class_name Customer
 
+var fill_style: StyleBoxFlat
 signal served(customer: Customer)
 signal left_unserved(customer: Customer)
 
-const WALK_SPEED := 120.0
+const WALK_SPEED := 200.0
 
 @export var order: String = "gaseosa"
 @export var order_icon: Texture2D
@@ -17,6 +18,9 @@ var patience: float
 var player: Player = null
 var slot_pos: Vector2
 var exit_pos: Vector2
+var path: Array[Vector2] = []
+var entry_path: Array[Vector2] = []
+var exit_path: Array[Vector2] = []
 
 @onready var bar: ProgressBar = $PatienceBar
 @onready var bubble: Node2D = $Bubble
@@ -26,15 +30,32 @@ var exit_pos: Vector2
 # Lo llama quien crea al cliente, justo después de agregarlo a la escena
 func setup(entrance: Vector2, slot: Vector2) -> void:
 	global_position = entrance
-	exit_pos = entrance
-	slot_pos = slot
+	var corner := Vector2(slot.x, entrance.y)   # el codo de la L
+	entry_path = [corner, slot]
+	exit_path = [corner, entrance]
+	path = entry_path.duplicate()
 
 
 func _ready() -> void:
 	patience = max_patience
+	
+	# --- Barra de paciencia ---
+	bar.show_percentage = false
+	bar.custom_minimum_size = Vector2(65, 10)
+	bar.size = Vector2(65, 10)
 	bar.max_value = max_patience
-	bar.value = max_patience
 	bar.visible = false
+
+	var bg := StyleBoxFlat.new()
+	bg.bg_color = Color(0.1, 0.1, 0.1, 0.8)
+	bg.set_corner_radius_all(3)
+	bar.add_theme_stylebox_override("background", bg)
+
+	fill_style = StyleBoxFlat.new()
+	fill_style.set_corner_radius_all(3)
+	bar.add_theme_stylebox_override("fill", fill_style)
+	_update_bar()
+	# --------------------------
 
 	bubble_icon.texture = order_icon
 	bubble.visible = false
@@ -46,17 +67,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match state:
 		State.ARRIVING:
-			if _walk_to(slot_pos, delta):
+			if _follow_path(delta):
 				state = State.WAITING
 				bar.visible = true
 				_show_bubble()
 		State.WAITING:
 			patience -= delta
-			bar.value = patience
+			_update_bar()
 			if patience <= 0.0:
 				_start_leaving(true)
 		State.LEAVING:
-			if _walk_to(exit_pos, delta):
+			if _follow_path(delta):
 				queue_free()
 
 
@@ -70,13 +91,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # Devuelve true cuando llegó al destino
-func _walk_to(target: Vector2, delta: float) -> bool:
-	global_position = global_position.move_toward(target, WALK_SPEED * delta)
-	return global_position.is_equal_approx(target)
+func _follow_path(delta: float) -> bool:
+	if path.is_empty():
+		return true
+	global_position = global_position.move_toward(path[0], WALK_SPEED * delta)
+	if global_position.is_equal_approx(path[0]):
+		path.pop_front()
+	return path.is_empty()
 
 
 func _start_leaving(angry: bool) -> void:
 	state = State.LEAVING
+	path = exit_path.duplicate()
 	bar.visible = false
 	bubble.visible = false
 	if angry:
@@ -99,3 +125,11 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body == player:
 		player = null
+
+func _update_bar() -> void:
+	bar.value = patience
+	var ratio := patience / max_patience
+	if ratio > 0.5:
+		fill_style.bg_color = Color.YELLOW.lerp(Color.GREEN, (ratio - 0.5) * 2.0)
+	else:
+		fill_style.bg_color = Color.RED.lerp(Color.YELLOW, ratio * 2.0)
