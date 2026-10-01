@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://h8k21cixa72m"]
 
 [ext_resource type="Script" uid="uid://chssvjuy3oblt" path="res://src/entities/machine/Fridge.gd" id="1_olqe0"]
-[ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="2_t37fl"]
+[ext_resource type="Texture2D" uid="uid://btmbi3tql8mko" path="res://assets/fridge.png" id="2_t37fl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
 size = Vector2(84, 224)

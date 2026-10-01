@@ -3,12 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://cdd0lph7gofww" path="res://src/entities/player/Player.tscn" id="1_4gxt3"]
 [ext_resource type="Script" uid="uid://j38kfx4hoaf7" path="res://src/Main.gd" id="1_vjwby"]
 [ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/Mesada.tscn" id="2_hk4rc"]
+[ext_resource type="Texture2D" uid="uid://c2bidmpvwgv1x" path="res://assets/background.png" id="3_8ec3e"]
 [ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
 [ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/customer/Customer.tscn" id="4_5qjmp"]
 
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
 customer_scene = ExtResource("4_5qjmp")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=163994369]
+position = Vector2(576.5, 325.5)
+scale = Vector2(9.0390625, 5.0703125)
+texture = ExtResource("3_8ec3e")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
 position = Vector2(819, 109)

@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="1_7oqee"]
 [ext_resource type="Script" uid="uid://c1orqbe2ge3eu" path="res://src/entities/customer/Customer.gd" id="1_ow63a"]
+[ext_resource type="Texture2D" uid="uid://eq5oflvxs5dt" path="res://assets/customer.png" id="3_cnvdg"]
+[ext_resource type="Texture2D" uid="uid://cv5xpofdhouel" path="res://assets/bubble.png" id="4_exle7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amk08"]
 size = Vector2(126, 281)
@@ -11,7 +13,7 @@ script = ExtResource("1_ow63a")
 order_icon = ExtResource("1_7oqee")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=332190992]
-texture = ExtResource("1_7oqee")
+texture = ExtResource("3_cnvdg")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=744916778]
 
@@ -30,7 +32,7 @@ offset_bottom = 94.0
 [node name="Background" type="Sprite2D" parent="Bubble" unique_id=333098867]
 position = Vector2(0, -98)
 scale = Vector2(1.015625, 0.4453125)
-texture = ExtResource("1_7oqee")
+texture = ExtResource("4_exle7")
 
 [node name="Icon" type="Sprite2D" parent="Bubble" unique_id=2007132207]
 position = Vector2(-1, -98)

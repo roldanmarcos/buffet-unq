@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5ftgosx7v8xq"]
 
-[ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="1_jnb03"]
+[ext_resource type="Texture2D" uid="uid://c8l1a10v3utun" path="res://assets/mesada.png" id="1_jnb03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jnb03"]
 size = Vector2(440, 86)
