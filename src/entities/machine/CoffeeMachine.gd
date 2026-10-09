@@ -8,10 +8,12 @@ var state: State = State.IDLE
 
 @onready var prep_timer: Timer = $PrepTimer
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var cup: Sprite2D = $Cup
 
 
 func _ready() -> void:
 	super._ready()
+	cup.texture = Items.icon("cafe")
 	prep_timer.one_shot = true
 	prep_timer.wait_time = prep_seconds
 	prep_timer.timeout.connect(_on_prep_timer_timeout)
@@ -38,6 +40,7 @@ func _on_prep_timer_timeout() -> void:
 
 func _set_state(new_state: State) -> void:
 	state = new_state
+	cup.visible = (state == State.READY)
 	match state:
 		State.IDLE:
 			sprite.modulate = Color.WHITE

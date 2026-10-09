@@ -5,12 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/Mesada.tscn" id="2_hk4rc"]
 [ext_resource type="Texture2D" uid="uid://c2bidmpvwgv1x" path="res://assets/background.png" id="3_8ec3e"]
 [ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
+[ext_resource type="PackedScene" uid="uid://bfjxufr2j1o0" path="res://src/entities/Money.tscn" id="3_insap"]
 [ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/customer/Customer.tscn" id="4_5qjmp"]
 [ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
+[ext_resource type="PackedScene" uid="uid://vxse62604jmo" path="res://src/entities/machine/CashRegister.tscn" id="8_fh42b"]
 
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
 customer_scene = ExtResource("4_5qjmp")
+money_scene = ExtResource("3_insap")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=163994369]
 position = Vector2(576.5, 325.5)
@@ -33,7 +36,19 @@ position = Vector2(572, 435)
 position = Vector2(1181, 583)
 
 [node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
-position = Vector2(499, 493)
+position = Vector2(566, 498)
+
+[node name="MoneyPos" type="Marker2D" parent="Lugar1" unique_id=802177737]
+position = Vector2(1, -65)
+
+[node name="Lugar2" type="Marker2D" parent="." unique_id=1006403468]
+position = Vector2(753, 496)
+
+[node name="MoneyPos" type="Marker2D" parent="Lugar2" unique_id=892011439]
+position = Vector2(-3, -60)
 
 [node name="Mesada2" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
 position = Vector2(562, 177)
+
+[node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
+position = Vector2(402, 411)

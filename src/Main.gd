@@ -1,24 +1,34 @@
 extends Node
 
 @export var customer_scene: PackedScene
+@export var money_scene: PackedScene
+var money := 0
 
 var lost_customers := 0
 
 
 func _ready() -> void:
-	_spawn_customer()
+	$CashRegister.cash_deposited.connect(_on_cash_deposited)
+	_spawn_customer($Lugar1)
+	await get_tree().create_timer(5.0).timeout
+	_spawn_customer($Lugar2)
 
 
-func _spawn_customer() -> void:
+func _spawn_customer(slot: Marker2D) -> void:
 	var c: Customer = customer_scene.instantiate()
+	c.order = Items.random_order()
+	c.set_meta("money_pos", slot.get_node("MoneyPos").global_position)
 	add_child(c)
-	c.setup($Entrada.global_position, $Lugar1.global_position)
+	c.setup($Entrada.global_position, slot.global_position)
 	c.served.connect(_on_customer_served)
 	c.left_unserved.connect(_on_customer_left)
 
 
-func _on_customer_served(_customer: Customer) -> void:
+func _on_customer_served(customer: Customer) -> void:
 	print("Cliente atendido")
+	var m: Node2D = money_scene.instantiate()
+	add_child(m)
+	m.global_position = customer.get_meta("money_pos")
 
 
 func _on_customer_left(_customer: Customer) -> void:
@@ -26,3 +36,8 @@ func _on_customer_left(_customer: Customer) -> void:
 	print("Clientes perdidos: ", lost_customers)
 	if lost_customers >= 3:
 		print("Perdiste el nivel")
+
+
+func _on_cash_deposited() -> void:
+	money += 10
+	print("Plata: ", money)

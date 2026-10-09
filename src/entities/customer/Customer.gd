@@ -8,7 +8,6 @@ signal left_unserved(customer: Customer)
 const WALK_SPEED := 200.0
 
 @export var order: String = "gaseosa"
-@export var order_icon: Texture2D
 @export var max_patience: float = 15.0
 
 enum State { ARRIVING, WAITING, LEAVING }
@@ -27,10 +26,9 @@ var exit_path: Array[Vector2] = []
 @onready var bubble_icon: Sprite2D = $Bubble/Icon
 
 
-# Lo llama quien crea al cliente, justo después de agregarlo a la escena
 func setup(entrance: Vector2, slot: Vector2) -> void:
 	global_position = entrance
-	var corner := Vector2(slot.x, entrance.y)   # el codo de la L
+	var corner := Vector2(slot.x, entrance.y)
 	entry_path = [corner, slot]
 	exit_path = [corner, entrance]
 	path = entry_path.duplicate()
@@ -39,7 +37,6 @@ func setup(entrance: Vector2, slot: Vector2) -> void:
 func _ready() -> void:
 	patience = max_patience
 	
-	# --- Barra de paciencia ---
 	bar.show_percentage = false
 	bar.custom_minimum_size = Vector2(65, 10)
 	bar.size = Vector2(65, 10)
@@ -55,9 +52,8 @@ func _ready() -> void:
 	fill_style.set_corner_radius_all(3)
 	bar.add_theme_stylebox_override("fill", fill_style)
 	_update_bar()
-	# --------------------------
 
-	bubble_icon.texture = order_icon
+	bubble_icon.texture = Items.icon(order)
 	bubble.visible = false
 
 	$InteractionArea.body_entered.connect(_on_body_entered)
@@ -90,7 +86,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		_start_leaving(false)
 
 
-# Devuelve true cuando llegó al destino
 func _follow_path(delta: float) -> bool:
 	if path.is_empty():
 		return true
