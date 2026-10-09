@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c2bidmpvwgv1x" path="res://assets/background.png" id="3_8ec3e"]
 [ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
 [ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/customer/Customer.tscn" id="4_5qjmp"]
+[ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
 
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
@@ -17,16 +18,22 @@ scale = Vector2(9.0390625, 5.0703125)
 texture = ExtResource("3_8ec3e")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
-position = Vector2(819, 109)
+position = Vector2(829, 106)
+
+[node name="CoffeeMachine" parent="." unique_id=562397826 instance=ExtResource("7_38a0m")]
+position = Vector2(388, 82)
 
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
 position = Vector2(265, 139)
 
 [node name="Mesada" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
-position = Vector2(644, 383)
+position = Vector2(572, 435)
 
 [node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
 position = Vector2(1181, 583)
 
 [node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
 position = Vector2(499, 493)
+
+[node name="Mesada2" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
+position = Vector2(562, 177)
