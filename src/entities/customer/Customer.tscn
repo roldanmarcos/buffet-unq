@@ -5,10 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://eq5oflvxs5dt" path="res://assets/customer.png" id="3_cnvdg"]
 [ext_resource type="Texture2D" uid="uid://cv5xpofdhouel" path="res://assets/bubble.png" id="4_exle7"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exle7"]
+size = Vector2(65, 131)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amk08"]
 size = Vector2(65, 281)
 
-[node name="Costumer" type="Node2D" unique_id=40752684]
+[node name="Costumer" type="CharacterBody2D" unique_id=2033297472]
 script = ExtResource("1_ow63a")
 order_icon = ExtResource("1_7oqee")
 
@@ -16,6 +19,10 @@ order_icon = ExtResource("1_7oqee")
 position = Vector2(0.5000019, -1.5)
 scale = Vector2(0.5078125, 1.0234375)
 texture = ExtResource("3_cnvdg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=549465207]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_exle7")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=744916778]
 
