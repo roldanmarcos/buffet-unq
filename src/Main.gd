@@ -11,6 +11,8 @@ var money := 0
 
 var lost_customers := 0
 @onready var game_hud: CanvasLayer = $GameHUD
+@export var spawn_delay_min: float = 2.0
+@export var spawn_delay_max: float = 4.0
 
 
 func _ready() -> void:
@@ -20,12 +22,15 @@ func _ready() -> void:
 	level_timer.wait_time = level_seconds
 	level_timer.timeout.connect(_on_level_timer_timeout)
 	level_timer.start()
-	_spawn_customer($Lugar1)
-	await get_tree().create_timer(5.0).timeout
-	_spawn_customer($Lugar2)
+	_schedule_spawn($Lugar1, 0.0)
+	_schedule_spawn($Lugar2, 5.0)
 
+func _schedule_spawn(slot: Marker2D, delay: float) -> void:
+	get_tree().create_timer(delay, false).timeout.connect(_spawn_customer.bind(slot))
 
 func _spawn_customer(slot: Marker2D) -> void:
+	if level_over:
+		return
 	var c: Customer = customer_scene.instantiate()
 	c.order = Items.random_order()
 	c.set_meta("money_pos", slot.get_node("MoneyPos").global_position)
@@ -33,8 +38,11 @@ func _spawn_customer(slot: Marker2D) -> void:
 	c.setup($Entrada.global_position, slot.global_position)
 	c.served.connect(_on_customer_served)
 	c.left_unserved.connect(_on_customer_left)
+	c.departed.connect(_on_customer_departed.bind(slot))
 
-
+func _on_customer_departed(_customer: Customer, slot: Marker2D) -> void:
+	_schedule_spawn(slot, randf_range(spawn_delay_min, spawn_delay_max))
+	
 func _on_customer_served(customer: Customer) -> void:
 	print("Cliente atendido")
 	var m: Money = money_scene.instantiate()

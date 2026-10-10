@@ -25,6 +25,7 @@ var exit_path: Array[Vector2] = []
 @onready var bubble: Node2D = $Bubble
 @onready var bubble_icon: Sprite2D = $Bubble/Icon
 
+signal departed(customer: Customer)
 
 func setup(entrance: Vector2, slot: Vector2) -> void:
 	global_position = entrance
@@ -74,6 +75,7 @@ func _process(delta: float) -> void:
 				_start_leaving(true)
 		State.LEAVING:
 			if _follow_path(delta):
+				departed.emit(self)
 				queue_free()
 
 
