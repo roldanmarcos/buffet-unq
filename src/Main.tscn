@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
 [ext_resource type="PackedScene" uid="uid://vxse62604jmo" path="res://src/entities/machine/CashRegister.tscn" id="8_fh42b"]
 [ext_resource type="PackedScene" path="res://src/entities/machine/TrashCan.tscn" id="9_trash"]
+[ext_resource type="PackedScene" path="res://src/ui/GameHUD.tscn" id="10_hud"]
 
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
@@ -56,3 +57,5 @@ position = Vector2(402, 411)
 
 [node name="TrashCan" parent="." instance=ExtResource("9_trash")]
 position = Vector2(1012, 411)
+
+[node name="GameHUD" parent="." instance=ExtResource("10_hud")]

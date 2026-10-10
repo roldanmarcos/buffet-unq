@@ -1,0 +1,84 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/ui/GameHUD.gd" id="1"]
+
+[node name="GameHUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseButton" type="Button" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 76.0
+text = "..."
+theme_override_font_sizes/font_size = 24
+
+[node name="MoneyPanel" type="PanelContainer" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 72.0
+
+[node name="MoneyLabel" type="Label" parent="UI/MoneyPanel"]
+layout_mode = 2
+text = "Plata: $0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DimBackground" type="ColorRect" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.12, 0.12, 0.55)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseOptions" type="VBoxContainer" parent="UI/PauseMenu/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PausedLabel" type="Label" parent="UI/PauseMenu/CenterContainer/PauseOptions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Juego pausado"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="UI/PauseMenu/CenterContainer/PauseOptions"]
+custom_minimum_size = Vector2(260, 52)
+layout_mode = 2
+text = "Menú principal"
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/CenterContainer/PauseOptions"]
+custom_minimum_size = Vector2(260, 52)
+layout_mode = 2
+text = "Continuar"

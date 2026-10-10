@@ -1,4 +1,7 @@
 extends Area2D
+class_name Money
+
+@export var value: int = 10
 
 var player: Player = null
 
@@ -20,5 +23,5 @@ func _on_body_exited(body: Node2D) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and player != null and not player.has_item():
-		player.hold("plata")
+		player.hold("plata", value)
 		queue_free()
