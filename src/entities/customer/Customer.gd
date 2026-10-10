@@ -7,7 +7,7 @@ signal left_unserved(customer: Customer)
 
 const WALK_SPEED := 200.0
 
-@export var order: String = "gaseosa"
+@export var order: String = ""
 @export var max_patience: float = 15.0
 
 enum State { ARRIVING, WAITING, LEAVING }
