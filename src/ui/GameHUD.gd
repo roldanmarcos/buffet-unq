@@ -4,7 +4,12 @@ signal main_menu_requested
 
 @onready var money_label: Label = $UI/MoneyPanel/MoneyLabel
 @onready var pause_menu: Control = $UI/PauseMenu
+@onready var timer_label: Label = $UI/TimerPanel/TimerLabel
 
+func set_time(seconds_left: float) -> void:
+	var s := ceili(seconds_left)
+	timer_label.text = "%d:%02d" % [floori(s / 60.0), s % 60]
+	timer_label.modulate = Color.RED if s <= 10 else Color.WHITE
 
 func _ready() -> void:
 	$UI/PauseButton.pressed.connect(_on_pause_button_pressed)

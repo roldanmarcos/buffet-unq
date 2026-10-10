@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
 [ext_resource type="PackedScene" uid="uid://vxse62604jmo" path="res://src/entities/machine/CashRegister.tscn" id="8_fh42b"]
 [ext_resource type="PackedScene" uid="uid://cd4pyjm0ij4wm" path="res://src/entities/machine/TrashCan.tscn" id="9_trash"]
-[ext_resource type="PackedScene" path="res://src/ui/GameHUD.tscn" id="10_hud"]
+[ext_resource type="PackedScene" uid="uid://co75ni8k6qdki" path="res://src/ui/GameHUD.tscn" id="10_hud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
 size = Vector2(1157, 150)
@@ -69,3 +69,5 @@ position = Vector2(402, 411)
 position = Vector2(1012, 411)
 
 [node name="GameHUD" parent="." unique_id=707501026 instance=ExtResource("10_hud")]
+
+[node name="LevelTimer" type="Timer" parent="." unique_id=1797436448]

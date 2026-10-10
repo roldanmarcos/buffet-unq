@@ -1,12 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://co75ni8k6qdki"]
 
-[ext_resource type="Script" path="res://src/ui/GameHUD.gd" id="1"]
+[ext_resource type="Script" uid="uid://dt41yb02u58kc" path="res://src/ui/GameHUD.gd" id="1"]
 
-[node name="GameHUD" type="CanvasLayer"]
+[node name="GameHUD" type="CanvasLayer" unique_id=424086381]
 process_mode = 3
 script = ExtResource("1")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1115508343]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,29 +14,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseButton" type="Button" parent="UI"]
+[node name="PauseButton" type="Button" parent="UI" unique_id=251020696]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 84.0
 offset_bottom = 76.0
-text = "..."
 theme_override_font_sizes/font_size = 24
+text = "..."
 
-[node name="MoneyPanel" type="PanelContainer" parent="UI"]
+[node name="MoneyPanel" type="PanelContainer" parent="UI" unique_id=2083044759]
+layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -240.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 72.0
+offset_left = -242.0
+offset_top = 83.0
+offset_right = -22.0
+offset_bottom = 135.0
+grow_horizontal = 0
 
-[node name="MoneyLabel" type="Label" parent="UI/MoneyPanel"]
+[node name="MoneyLabel" type="Label" parent="UI/MoneyPanel" unique_id=2027547374]
 layout_mode = 2
 text = "Plata: $0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseMenu" type="Control" parent="UI"]
+[node name="TimerPanel" type="PanelContainer" parent="UI" unique_id=196275172]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 21.0
+offset_right = 1130.0
+offset_bottom = 73.0
+
+[node name="TimerLabel" type="Label" parent="UI/TimerPanel" unique_id=1830215559]
+layout_mode = 2
+text = "timer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" type="Control" parent="UI" unique_id=1518934821]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -45,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DimBackground" type="ColorRect" parent="UI/PauseMenu"]
+[node name="DimBackground" type="ColorRect" parent="UI/PauseMenu" unique_id=1241945854]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,7 +71,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12, 0.12, 0.12, 0.55)
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/PauseMenu"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/PauseMenu" unique_id=460042642]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,23 +79,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseOptions" type="VBoxContainer" parent="UI/PauseMenu/CenterContainer"]
+[node name="PauseOptions" type="VBoxContainer" parent="UI/PauseMenu/CenterContainer" unique_id=1414497914]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="PausedLabel" type="Label" parent="UI/PauseMenu/CenterContainer/PauseOptions"]
+[node name="PausedLabel" type="Label" parent="UI/PauseMenu/CenterContainer/PauseOptions" unique_id=957668156]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Juego pausado"
 horizontal_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="UI/PauseMenu/CenterContainer/PauseOptions"]
+[node name="MainMenuButton" type="Button" parent="UI/PauseMenu/CenterContainer/PauseOptions" unique_id=974266688]
 custom_minimum_size = Vector2(260, 52)
 layout_mode = 2
 text = "Menú principal"
 
-[node name="ResumeButton" type="Button" parent="UI/PauseMenu/CenterContainer/PauseOptions"]
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/CenterContainer/PauseOptions" unique_id=2028486161]
 custom_minimum_size = Vector2(260, 52)
 layout_mode = 2
 text = "Continuar"
