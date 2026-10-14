@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dinhfk3lp5pyi"]
 
-[ext_resource type="Script" path="res://src/ui/Start.gd" id="1"]
+[ext_resource type="Script" uid="uid://bbjsiete2se5t" path="res://src/ui/Start.gd" id="1"]
 
-[node name="Start" type="Control"]
+[node name="Start" type="Control" unique_id=279461074]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1655580213]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.88, 0.88, 0.88, 1)
 
-[node name="IntroLayer" type="CenterContainer" parent="."]
+[node name="IntroLayer" type="CenterContainer" parent="." unique_id=1656209682]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,23 +28,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Intro" type="VBoxContainer" parent="IntroLayer"]
+[node name="Intro" type="VBoxContainer" parent="IntroLayer" unique_id=1134239396]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="GameTitle" type="Label" parent="IntroLayer/Intro"]
+[node name="GameTitle" type="Label" parent="IntroLayer/Intro" unique_id=1261676684]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "buffet unq"
 horizontal_alignment = 1
 
-[node name="IntroTimer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="IntroTimer" type="Timer" parent="." unique_id=1587044244]
+wait_time = 0.011
 one_shot = true
 autostart = true
 
-[node name="MenuLayer" type="CenterContainer" parent="."]
+[node name="MenuLayer" type="CenterContainer" parent="." unique_id=359415266]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -53,28 +53,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="VBoxContainer" parent="MenuLayer"]
+[node name="Menu" type="VBoxContainer" parent="MenuLayer" unique_id=991697648]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="MenuTitle" type="Label" parent="MenuLayer/Menu"]
+[node name="MenuTitle" type="Label" parent="MenuLayer/Menu" unique_id=238535995]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Menú principal"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="MenuLayer/Menu"]
+[node name="StartButton" type="Button" parent="MenuLayer/Menu" unique_id=1952644469]
 custom_minimum_size = Vector2(260, 52)
 layout_mode = 2
 text = "Iniciar juego"
 
-[node name="TutorialButton" type="Button" parent="MenuLayer/Menu"]
+[node name="TutorialButton" type="Button" parent="MenuLayer/Menu" unique_id=1531333153]
 custom_minimum_size = Vector2(260, 52)
 layout_mode = 2
 text = "Tutorial"
 
-[node name="TutorialLayer" type="Control" parent="."]
+[node name="TutorialLayer" type="Control" parent="." unique_id=667132243]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -83,12 +83,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackButton" type="Button" parent="TutorialLayer"]
+[node name="BackButton" type="Button" parent="TutorialLayer" unique_id=241328247]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 84.0
 offset_bottom = 84.0
-text = "←"
 theme_override_font_sizes/font_size = 32
+text = "←"
 
-[node name="TutorialSprite" type="Sprite2D" parent="TutorialLayer"]
+[node name="TutorialSprite" type="Sprite2D" parent="TutorialLayer" unique_id=823939380]

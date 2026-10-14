@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5ftgosx7v8xq"]
 
-[ext_resource type="Texture2D" uid="uid://c8l1a10v3utun" path="res://assets/mesada.png" id="1_wjrww"]
+[ext_resource type="Texture2D" uid="uid://dgkglg0cjj8p0" path="res://assets/mesadaFondo.png" id="1_wjrww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jnb03"]
 size = Vector2(260, 86)
@@ -8,8 +8,7 @@ size = Vector2(260, 86)
 [node name="MesadaFondo" type="StaticBody2D" unique_id=110983076]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=841627255]
-position = Vector2(-0.49999237, 0)
-scale = Vector2(2.0234375, 0.671875)
+scale = Vector2(0.18030512, 0.20449843)
 texture = ExtResource("1_wjrww")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=273927644]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8l1a10v3utun"
-path="res://.godot/imported/mesada.png-bbc1ed79d36542f64f92be93491537b3.ctex"
+uid="uid://dgkglg0cjj8p0"
+path="res://.godot/imported/mesadaFondo.png-60f85a6af04c4baf3dfbbb25a0952da9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mesada.png"
-dest_files=["res://.godot/imported/mesada.png-bbc1ed79d36542f64f92be93491537b3.ctex"]
+source_file="res://assets/mesadaFondo.png"
+dest_files=["res://.godot/imported/mesadaFondo.png-60f85a6af04c4baf3dfbbb25a0952da9.ctex"]
 
 [params]
 

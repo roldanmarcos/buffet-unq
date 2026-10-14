@@ -22,8 +22,8 @@ customer_scene = ExtResource("4_5qjmp")
 money_scene = ExtResource("3_insap")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=163994369]
-position = Vector2(450.5, 272.1797)
-scale = Vector2(0.58528644, 0.734024)
+position = Vector2(460.00003, 272.1797)
+scale = Vector2(0.5976563, 0.734024)
 texture = ExtResource("3_8ec3e")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=1739874771]
@@ -37,18 +37,6 @@ shape = SubResource("RectangleShape2D_rf6br")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
 position = Vector2(697, 139)
-
-[node name="CoffeeMachine" parent="." unique_id=562397826 instance=ExtResource("7_38a0m")]
-position = Vector2(238, 118)
-
-[node name="MesadaFrente" parent="." unique_id=2137042834 instance=ExtResource("8_k2i6c")]
-position = Vector2(255, 471)
-
-[node name="MesadaFrente2" parent="." unique_id=1098256160 instance=ExtResource("8_k2i6c")]
-position = Vector2(512, 471)
-
-[node name="MesadaFrente3" parent="." unique_id=24184181 instance=ExtResource("8_k2i6c")]
-position = Vector2(769, 471)
 
 [node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
 position = Vector2(934, 592)
@@ -71,8 +59,8 @@ position = Vector2(257, 209)
 [node name="MesadaFondo2" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
 position = Vector2(515, 209)
 
-[node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
-position = Vector2(207, 468)
+[node name="CoffeeMachine" parent="." unique_id=562397826 instance=ExtResource("7_38a0m")]
+position = Vector2(238, 148)
 
 [node name="TrashCan" parent="." unique_id=788664407 instance=ExtResource("9_trash")]
 position = Vector2(804, 211)
@@ -84,3 +72,15 @@ position = Vector2(804, 211)
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
 position = Vector2(65.99999, 194.99998)
 scale = Vector2(0.99999994, 0.99999994)
+
+[node name="MesadaFrente" parent="." unique_id=2137042834 instance=ExtResource("8_k2i6c")]
+position = Vector2(263, 471)
+
+[node name="MesadaFrente2" parent="." unique_id=1098256160 instance=ExtResource("8_k2i6c")]
+position = Vector2(516, 471)
+
+[node name="MesadaFrente3" parent="." unique_id=24184181 instance=ExtResource("8_k2i6c")]
+position = Vector2(769, 471)
+
+[node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
+position = Vector2(194, 402)

@@ -13,7 +13,7 @@ var state: State = State.IDLE
 
 func _ready() -> void:
 	super._ready()
-	Items.apply_icon(cup, "cafe", 70)
+	Items.apply_icon(cup, "cafe", 50)
 	prep_timer.one_shot = true
 	prep_timer.wait_time = prep_seconds
 	prep_timer.timeout.connect(_on_prep_timer_timeout)
