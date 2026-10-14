@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://co75ni8k6qdki" path="res://src/ui/GameHUD.tscn" id="10_hud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
-size = Vector2(1157, 150)
+size = Vector2(901.00006, 150)
 
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
@@ -21,52 +21,53 @@ customer_scene = ExtResource("4_5qjmp")
 money_scene = ExtResource("3_insap")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=163994369]
-position = Vector2(576.5, 325.5)
-scale = Vector2(9.0390625, 5.0703125)
+position = Vector2(449, 325.5)
+scale = Vector2(7.046875, 5.0703125)
 texture = ExtResource("3_8ec3e")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=1739874771]
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=576646646]
-position = Vector2(577.5, 75)
+position = Vector2(449.49994, 74.999985)
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rf6br")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
-position = Vector2(829, 106)
+position = Vector2(643, 106)
 
 [node name="CoffeeMachine" parent="." unique_id=562397826 instance=ExtResource("7_38a0m")]
-position = Vector2(388, 82)
+position = Vector2(238, 80)
 
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
-position = Vector2(47, 157)
+position = Vector2(66, 157)
 
 [node name="Mesada" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
-position = Vector2(572, 435)
+position = Vector2(373, 441)
 
 [node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
-position = Vector2(1181, 583)
+position = Vector2(934, 592)
 
 [node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
-position = Vector2(566, 498)
+position = Vector2(307, 500)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar1" unique_id=802177737]
 position = Vector2(1, -65)
 
 [node name="Lugar2" type="Marker2D" parent="." unique_id=1006403468]
-position = Vector2(753, 496)
+position = Vector2(468, 498)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar2" unique_id=892011439]
 position = Vector2(-3, -60)
 
 [node name="Mesada2" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
-position = Vector2(562, 177)
+position = Vector2(380, 175)
 
 [node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
-position = Vector2(402, 411)
+position = Vector2(207, 430)
 
 [node name="TrashCan" parent="." unique_id=788664407 instance=ExtResource("9_trash")]
-position = Vector2(1012, 411)
+position = Vector2(755, 334)
 
 [node name="GameHUD" parent="." unique_id=707501026 instance=ExtResource("10_hud")]
 
