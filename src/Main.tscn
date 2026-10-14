@@ -2,18 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://cdd0lph7gofww" path="res://src/entities/player/Player.tscn" id="1_4gxt3"]
 [ext_resource type="Script" uid="uid://j38kfx4hoaf7" path="res://src/Main.gd" id="1_vjwby"]
-[ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/Mesada.tscn" id="2_hk4rc"]
+[ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/MesadaFondo.tscn" id="2_hk4rc"]
 [ext_resource type="Texture2D" uid="uid://c2bidmpvwgv1x" path="res://assets/background.png" id="3_8ec3e"]
 [ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
 [ext_resource type="PackedScene" uid="uid://bfjxufr2j1o0" path="res://src/entities/Money.tscn" id="3_insap"]
 [ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/customer/Customer.tscn" id="4_5qjmp"]
 [ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
 [ext_resource type="PackedScene" uid="uid://vxse62604jmo" path="res://src/entities/machine/CashRegister.tscn" id="8_fh42b"]
+[ext_resource type="PackedScene" uid="uid://cpo5dc1j6l7pq" path="res://src/environment/MesadaFrente.tscn" id="8_k2i6c"]
 [ext_resource type="PackedScene" uid="uid://cd4pyjm0ij4wm" path="res://src/entities/machine/TrashCan.tscn" id="9_trash"]
 [ext_resource type="PackedScene" uid="uid://co75ni8k6qdki" path="res://src/ui/GameHUD.tscn" id="10_hud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
-size = Vector2(901.00006, 150)
+size = Vector2(901.00006, 212.00006)
 
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
@@ -26,49 +27,60 @@ scale = Vector2(7.046875, 5.0703125)
 texture = ExtResource("3_8ec3e")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=1739874771]
+position = Vector2(0, 37.999996)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=576646646]
-position = Vector2(449.49994, 74.999985)
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(449.49982, 105.999954)
+scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("RectangleShape2D_rf6br")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
-position = Vector2(643, 106)
+position = Vector2(697, 139)
 
 [node name="CoffeeMachine" parent="." unique_id=562397826 instance=ExtResource("7_38a0m")]
-position = Vector2(238, 80)
+position = Vector2(238, 118)
 
-[node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
-position = Vector2(66, 157)
+[node name="MesadaFrente" parent="." unique_id=2137042834 instance=ExtResource("8_k2i6c")]
+position = Vector2(255, 471)
 
-[node name="Mesada" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
-position = Vector2(373, 441)
+[node name="MesadaFrente2" parent="." unique_id=1098256160 instance=ExtResource("8_k2i6c")]
+position = Vector2(512, 471)
+
+[node name="MesadaFrente3" parent="." unique_id=24184181 instance=ExtResource("8_k2i6c")]
+position = Vector2(769, 471)
 
 [node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
 position = Vector2(934, 592)
 
 [node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
-position = Vector2(307, 500)
+position = Vector2(307, 538)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar1" unique_id=802177737]
 position = Vector2(1, -65)
 
 [node name="Lugar2" type="Marker2D" parent="." unique_id=1006403468]
-position = Vector2(468, 498)
+position = Vector2(468, 536)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar2" unique_id=892011439]
 position = Vector2(-3, -60)
 
-[node name="Mesada2" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
-position = Vector2(380, 175)
+[node name="MesadaFondo" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
+position = Vector2(257, 209)
+
+[node name="MesadaFondo2" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
+position = Vector2(515, 209)
 
 [node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
-position = Vector2(207, 430)
+position = Vector2(207, 468)
 
 [node name="TrashCan" parent="." unique_id=788664407 instance=ExtResource("9_trash")]
-position = Vector2(755, 334)
+position = Vector2(804, 211)
 
 [node name="GameHUD" parent="." unique_id=707501026 instance=ExtResource("10_hud")]
 
 [node name="LevelTimer" type="Timer" parent="." unique_id=1797436448]
+
+[node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
+position = Vector2(65.99999, 194.99998)
+scale = Vector2(0.99999994, 0.99999994)
