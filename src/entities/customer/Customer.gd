@@ -54,7 +54,7 @@ func _ready() -> void:
 	bar.add_theme_stylebox_override("fill", fill_style)
 	_update_bar()
 
-	bubble_icon.texture = Items.icon(order)
+	Items.apply_icon(bubble_icon, order, 40)
 	bubble.visible = false
 
 	$InteractionArea.body_entered.connect(_on_body_entered)

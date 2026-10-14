@@ -1,7 +1,7 @@
 class_name Items
 
 const ICON_PATHS := {
-	"gaseosa": "res://icon.svg",
+	"gaseosa": "res://assets/soda_pepsi.png",
 	"cafe": "res://assets/coffee.png",
 	"plata": "res://assets/money.png"
 }
@@ -20,3 +20,11 @@ static func random_order() -> String:
 
 static func price(item: String) -> int:
 	return PRICES.get(item, 10)
+
+static func apply_icon(sprite: Sprite2D, item: String, size_px: float) -> void:
+	var tex := icon(item)
+	sprite.texture = tex
+	if tex == null:
+		return
+	var s := size_px / float(maxi(tex.get_width(), tex.get_height()))
+	sprite.scale = Vector2(s, s)
