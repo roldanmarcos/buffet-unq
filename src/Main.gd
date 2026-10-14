@@ -27,6 +27,7 @@ func _ready() -> void:
 	level_timer.start()
 	_schedule_spawn($Lugar1, 0.0)
 	_schedule_spawn($Lugar2, 5.0)
+	_schedule_spawn($Lugar3, 5.0)
 
 func _schedule_spawn(slot: Marker2D, delay: float) -> void:
 	get_tree().create_timer(delay, false).timeout.connect(_spawn_customer.bind(slot))

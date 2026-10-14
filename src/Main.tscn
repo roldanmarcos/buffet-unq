@@ -53,6 +53,12 @@ position = Vector2(468, 536)
 [node name="MoneyPos" type="Marker2D" parent="Lugar2" unique_id=892011439]
 position = Vector2(-3, -60)
 
+[node name="Lugar3" type="Marker2D" parent="." unique_id=458037581]
+position = Vector2(763, 536)
+
+[node name="MoneyPos" type="Marker2D" parent="Lugar3" unique_id=1496335617]
+position = Vector2(-3, -60)
+
 [node name="MesadaFondo" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
 position = Vector2(257, 209)
 
