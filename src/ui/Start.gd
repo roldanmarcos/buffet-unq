@@ -39,4 +39,4 @@ func _on_back_pressed() -> void:
 
 
 func _center_tutorial_sprite() -> void:
-	tutorial_sprite.position = get_viewport_rect().size / 2.0
+	tutorial_sprite.position = get_viewport_rect().size / 5.0

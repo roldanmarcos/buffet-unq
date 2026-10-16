@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 func hold(item: String, value: int = 0) -> void:
 	held_item = item
 	held_value = value
-	Items.apply_icon(held_item_visual, item, 36)
+	Items.apply_icon(held_item_visual, item, 60)
 	held_item_visual.visible = true
 
 func has_item() -> bool:

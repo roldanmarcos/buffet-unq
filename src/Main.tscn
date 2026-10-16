@@ -45,19 +45,19 @@ position = Vector2(934, 592)
 position = Vector2(307, 538)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar1" unique_id=802177737]
-position = Vector2(1, -65)
+position = Vector2(1, -92)
 
 [node name="Lugar2" type="Marker2D" parent="." unique_id=1006403468]
-position = Vector2(468, 536)
+position = Vector2(523, 536)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar2" unique_id=892011439]
-position = Vector2(-3, -60)
+position = Vector2(-3, -92)
 
 [node name="Lugar3" type="Marker2D" parent="." unique_id=458037581]
-position = Vector2(763, 536)
+position = Vector2(776, 536)
 
 [node name="MoneyPos" type="Marker2D" parent="Lugar3" unique_id=1496335617]
-position = Vector2(-3, -60)
+position = Vector2(-3, -92)
 
 [node name="MesadaFondo" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
 position = Vector2(257, 209)
@@ -80,13 +80,16 @@ position = Vector2(65.99999, 194.99998)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="MesadaFrente" parent="." unique_id=2137042834 instance=ExtResource("8_k2i6c")]
-position = Vector2(263, 471)
+position = Vector2(267, 471)
+
+[node name="MesadaFrente4" parent="." unique_id=1943163537 instance=ExtResource("8_k2i6c")]
+position = Vector2(14, 471)
 
 [node name="MesadaFrente2" parent="." unique_id=1098256160 instance=ExtResource("8_k2i6c")]
-position = Vector2(516, 471)
+position = Vector2(520, 471)
 
 [node name="MesadaFrente3" parent="." unique_id=24184181 instance=ExtResource("8_k2i6c")]
-position = Vector2(769, 471)
+position = Vector2(773, 471)
 
 [node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
 position = Vector2(194, 402)

@@ -60,6 +60,7 @@ func _on_customer_served(customer: Customer) -> void:
 func _on_customer_left(_customer: Customer) -> void:
 	active_customers -= 1
 	lost_customers += 1
+	game_hud.set_lives(3 - lost_customers)
 	if lost_customers >= 3:
 		_end_level(false)
 	else:

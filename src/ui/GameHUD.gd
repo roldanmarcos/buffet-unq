@@ -9,11 +9,18 @@ signal restart_requested
 @onready var money_label: Label = $UI/MoneyPanel/MoneyLabel
 @onready var pause_menu: Control = $UI/PauseMenu
 @onready var timer_label: Label = $UI/TimerPanel/TimerLabel
+const HEART_FULL := preload("res://assets/ui/corazon_lleno.png")
+const HEART_EMPTY := preload("res://assets/ui/corazon_vacio.png")
+@onready var hearts := [$UI/LivesPanel/Heart1, $UI/LivesPanel/Heart2, $UI/LivesPanel/Heart3]
 
 func set_time(seconds_left: float) -> void:
 	var s := ceili(seconds_left)
 	timer_label.text = "%d:%02d" % [floori(s / 60.0), s % 60]
 	timer_label.modulate = Color.RED if s <= 10 else Color.WHITE
+
+func set_lives(lives_left: int) -> void:
+	for i in hearts.size():
+		hearts[i].texture = HEART_FULL if i < lives_left else HEART_EMPTY
 
 func _ready() -> void:
 	$UI/PauseButton.pressed.connect(_on_pause_button_pressed)
@@ -22,10 +29,11 @@ func _ready() -> void:
 	$UI/ResultMenu/CenterContainer/ResultOptions/RestartButton.pressed.connect(func(): restart_requested.emit())
 	$UI/ResultMenu/CenterContainer/ResultOptions/MainMenuButton.pressed.connect(_on_main_menu_pressed)
 	set_money(0)
+	set_lives(3)
 
 
 func set_money(amount: int) -> void:
-	money_label.text = "Plata: $%d" % amount
+	money_label.text = "%d" % amount
 
 
 func _on_pause_button_pressed() -> void:
