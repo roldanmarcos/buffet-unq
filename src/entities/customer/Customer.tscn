@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c1orqbe2ge3eu" path="res://src/entities/customer/Customer.gd" id="1_ow63a"]
 [ext_resource type="Texture2D" uid="uid://eq5oflvxs5dt" path="res://assets/customer.png" id="3_cnvdg"]
+[ext_resource type="Texture2D" uid="uid://nb83n4xvib1q" path="res://assets/cloud.png" id="3_exle7"]
 [ext_resource type="Texture2D" uid="uid://cpn3aa8sn31mk" path="res://assets/soda_pepsi.png" id="4_8agcf"]
-[ext_resource type="Texture2D" uid="uid://cv5xpofdhouel" path="res://assets/bubble.png" id="4_exle7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exle7"]
 size = Vector2(65, 131)
@@ -38,11 +38,11 @@ offset_bottom = 93.0
 [node name="Bubble" type="Node2D" parent="." unique_id=1408409791]
 
 [node name="Background" type="Sprite2D" parent="Bubble" unique_id=333098867]
-position = Vector2(0, -98)
-scale = Vector2(1.015625, 0.4453125)
-texture = ExtResource("4_exle7")
+position = Vector2(0, -107.00001)
+scale = Vector2(0.09730114, 0.09730114)
+texture = ExtResource("3_exle7")
 
 [node name="Icon" type="Sprite2D" parent="Bubble" unique_id=2007132207]
-position = Vector2(-1, -98)
+position = Vector2(0, -113)
 scale = Vector2(0.34375, 0.265625)
 texture = ExtResource("4_8agcf")
