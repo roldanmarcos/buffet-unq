@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsu066ksn8y54" path="res://src/entities/machine/CashRegister.gd" id="1_wqoam"]
 [ext_resource type="Texture2D" uid="uid://bs3nhd6hkp7tc" path="res://assets/cashRegister.png" id="2_wqoam"]
+[ext_resource type="AudioStream" path="res://assets/sound/cashRegister.mp3" id="3_cash_sound"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
 size = Vector2(70, 25)
@@ -21,6 +22,10 @@ position = Vector2(0, 33.5)
 shape = SubResource("RectangleShape2D_t37fl")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=680347414]
+
+[node name="CashSound" type="AudioStreamPlayer2D" parent="." unique_id=1392650871]
+stream = ExtResource("3_cash_sound")
+max_distance = 1200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1456946751]
 position = Vector2(0, -9.5)

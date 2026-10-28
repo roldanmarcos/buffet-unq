@@ -17,7 +17,18 @@
 size = Vector2(901.00006, 212.00006)
 
 [sub_resource type="Shader" id="Shader_radial_reveal"]
-code = "shader_type canvas_item;\n\nuniform float reveal : hint_range(0.0, 1.0) = 0.0;\n\nvoid fragment() {\n\tvec2 pixel_position = (UV - vec2(0.5)) / SCREEN_PIXEL_SIZE;\n\tfloat shortest_side = min(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);\n\tfloat distance_from_center = length(pixel_position) / shortest_side;\n\tfloat visible_radius = reveal * 0.9;\n\tfloat darkness = 1.0 - smoothstep(visible_radius - 0.04, visible_radius + 0.04, distance_from_center);\n\tCOLOR = vec4(0.0, 0.0, 0.0, 1.0 - darkness);\n}"
+code = "shader_type canvas_item;
+
+uniform float reveal : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec2 pixel_position = (UV - vec2(0.5)) / SCREEN_PIXEL_SIZE;
+	float shortest_side = min(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);
+	float distance_from_center = length(pixel_position) / shortest_side;
+	float visible_radius = reveal * 0.9;
+	float darkness = 1.0 - smoothstep(visible_radius - 0.04, visible_radius + 0.04, distance_from_center);
+	COLOR = vec4(0.0, 0.0, 0.0, 1.0 - darkness);
+}"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_radial_reveal"]
 shader = SubResource("Shader_radial_reveal")

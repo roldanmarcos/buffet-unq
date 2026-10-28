@@ -6,4 +6,5 @@ func interact(p: Player) -> void:
 	if p.held_item == "plata":
 		var amount := p.held_value
 		p.drop_item()
+		$CashSound.play()
 		cash_deposited.emit(amount)
