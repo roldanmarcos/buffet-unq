@@ -16,6 +16,12 @@ func _ready() -> void:
 	intro_timer.timeout.connect(_on_intro_timer_timeout)
 	get_viewport().size_changed.connect(_center_tutorial_sprite)
 	_center_tutorial_sprite()
+	if get_tree().has_meta("returning_to_main_menu"):
+		get_tree().remove_meta("returning_to_main_menu")
+		intro_timer.stop()
+		intro_layer.hide()
+		menu_layer.show()
+		return
 	intro_timer.start()
 
 

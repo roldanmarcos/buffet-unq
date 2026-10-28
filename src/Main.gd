@@ -74,6 +74,7 @@ func _on_cash_deposited(amount: int) -> void:
 
 func _on_main_menu_requested() -> void:
 	get_tree().paused = false
+	get_tree().set_meta("returning_to_main_menu", true)
 	get_tree().change_scene_to_file("res://src/ui/Start.tscn")
 
 func _on_restart_requested() -> void:
