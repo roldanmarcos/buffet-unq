@@ -11,6 +11,9 @@ signal restart_requested
 @onready var timer_label: Label = $UI/TimerPanel/TimerLabel
 const HEART_FULL := preload("res://assets/ui/corazon_lleno.png")
 const HEART_EMPTY := preload("res://assets/ui/corazon_vacio.png")
+const WIN_SOUND := preload("res://assets/sound/win.mp3")
+const LOST_SOUND := preload("res://assets/sound/lost.mp3")
+@onready var result_sound: AudioStreamPlayer = $ResultSound
 @onready var hearts := [$UI/LivesPanel/Heart1, $UI/LivesPanel/Heart2, $UI/LivesPanel/Heart3]
 
 func set_time(seconds_left: float) -> void:
@@ -55,4 +58,6 @@ func show_level_result(won: bool, score: int) -> void:
 	result_title.text = "¡Nivel completado!" if won else "Perdiste: se fueron 3 clientes"
 	result_score.text = "Recaudaste: $%d" % score
 	result_menu.show()
+	result_sound.stream = WIN_SOUND if won else LOST_SOUND
+	result_sound.play()
 	get_tree().paused = true
