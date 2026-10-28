@@ -18,6 +18,9 @@ var pending_money := 0
 @onready var transition_layer: CanvasLayer = $TransitionLayer
 @onready var transition_rect: ColorRect = $TransitionLayer/Reveal
 @onready var transition_material: ShaderMaterial = transition_rect.material
+@onready var lost_customer_flash: ColorRect = $LostCustomerFlashLayer/Flash
+
+var lost_customer_flash_tween: Tween
 
 
 func _ready() -> void:
@@ -76,11 +79,23 @@ func _on_customer_served(customer: Customer) -> void:
 func _on_customer_left(_customer: Customer) -> void:
 	active_customers -= 1
 	lost_customers += 1
+	_show_lost_customer_flash()
 	game_hud.set_lives(3 - lost_customers)
 	if lost_customers >= 3:
 		_end_level(false)
 	else:
 		_check_level_complete()
+
+func _show_lost_customer_flash() -> void:
+	if lost_customer_flash_tween and lost_customer_flash_tween.is_running():
+		lost_customer_flash_tween.kill()
+	lost_customer_flash.modulate.a = 0.0
+	lost_customer_flash.visible = true
+	lost_customer_flash_tween = create_tween()
+	lost_customer_flash_tween.tween_property(lost_customer_flash, "modulate:a", 0.32, 0.35).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	lost_customer_flash_tween.tween_interval(0.3)
+	lost_customer_flash_tween.tween_property(lost_customer_flash, "modulate:a", 0.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	lost_customer_flash_tween.tween_callback(func(): lost_customer_flash.visible = false)
 
 func _on_cash_deposited(amount: int) -> void:
 	pending_money -= 1

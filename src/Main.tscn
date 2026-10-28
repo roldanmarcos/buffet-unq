@@ -34,6 +34,12 @@ void fragment() {
 shader = SubResource("Shader_radial_reveal")
 shader_parameter/reveal = 0.0
 
+[sub_resource type="Shader" id="Shader_red_vignette"]
+code = "shader_type canvas_item;\n\nvoid fragment() {\n\tfloat distance_from_center = length((UV - vec2(0.5)) * 2.0);\n\tfloat edge_strength = smoothstep(0.2, 1.0, distance_from_center);\n\tfloat tint_opacity = mix(0.08, 0.72, edge_strength);\n\tCOLOR = vec4(vec3(0.34, 0.10, 0.10), tint_opacity);\n}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_red_vignette"]
+shader = SubResource("Shader_red_vignette")
+
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
 customer_scene = ExtResource("4_5qjmp")
@@ -124,3 +130,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="LostCustomerFlashLayer" type="CanvasLayer" parent="." unique_id=1392650872]
+layer = 99
+
+[node name="Flash" type="ColorRect" parent="LostCustomerFlashLayer" unique_id=1392650873]
+visible = false
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_red_vignette")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
