@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d0i24t584hfqe"]
+
+[ext_resource type="Texture2D" uid="uid://styqtb6d6x6i" path="res://assets/hotDogs.png" id="1_uiljx"]
+[ext_resource type="Texture2D" uid="uid://capkfiqs803m" path="res://assets/hotDog.png" id="2_uiljx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
+size = Vector2(86, 91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qjmp"]
+size = Vector2(86, 201)
+
+[node name="HotDogs" type="StaticBody2D" unique_id=940246524]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=915455090]
+scale = Vector2(0.09078657, 0.099529)
+texture = ExtResource("1_uiljx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=136802334]
+shape = SubResource("RectangleShape2D_t37fl")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=680347414]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1456946751]
+position = Vector2(0, 55.5)
+shape = SubResource("RectangleShape2D_5qjmp")
+
+[node name="PrepTimer" type="Timer" parent="." unique_id=1231842902]
+
+[node name="HotDog" type="Sprite2D" parent="." unique_id=1433429031]
+position = Vector2(3.9999995, 15)
+scale = Vector2(0.035115257, 0.035115257)
+texture = ExtResource("2_uiljx")

@@ -206,6 +206,7 @@ texture = ExtResource("2_5wlbw")
 expand_mode = 1
 
 [node name="TitleLabel" type="Label" parent="UI/ResultMenu/CenterContainer/ResultOptions" unique_id=531330178]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -184.0
 offset_top = -149.0
@@ -216,6 +217,7 @@ text = "¡Nivel completado!"
 horizontal_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="UI/ResultMenu/CenterContainer/ResultOptions" unique_id=1396607673]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -191.0
 offset_top = -93.0
