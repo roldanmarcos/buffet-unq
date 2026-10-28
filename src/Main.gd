@@ -15,12 +15,25 @@ var pending_money := 0
 
 @onready var level_timer: Timer = $LevelTimer
 @onready var game_hud: CanvasLayer = $GameHUD
+@onready var transition_layer: CanvasLayer = $TransitionLayer
+@onready var transition_rect: ColorRect = $TransitionLayer/Reveal
+@onready var transition_material: ShaderMaterial = transition_rect.material
 
 
 func _ready() -> void:
+	get_tree().paused = true
+	transition_material.set_shader_parameter("reveal", 0.0)
+	var reveal_tween := create_tween()
+	reveal_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	reveal_tween.tween_method(_set_reveal, 0.0, 1.0, 1.7).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	reveal_tween.tween_callback(_finish_intro)
 	$CashRegister.cash_deposited.connect(_on_cash_deposited)
 	game_hud.main_menu_requested.connect(_on_main_menu_requested)
 	game_hud.restart_requested.connect(_on_restart_requested)
+
+func _finish_intro() -> void:
+	transition_layer.visible = false
+	get_tree().paused = false
 	level_timer.one_shot = true
 	level_timer.wait_time = level_seconds
 	level_timer.timeout.connect(_on_level_timer_timeout)
@@ -28,6 +41,9 @@ func _ready() -> void:
 	_schedule_spawn($Lugar1, 0.0)
 	_schedule_spawn($Lugar2, 5.0)
 	_schedule_spawn($Lugar3, 7.0)
+
+func _set_reveal(value: float) -> void:
+	transition_material.set_shader_parameter("reveal", value)
 
 func _schedule_spawn(slot: Marker2D, delay: float) -> void:
 	get_tree().create_timer(delay, false).timeout.connect(_spawn_customer.bind(slot))

@@ -16,6 +16,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
 size = Vector2(901.00006, 212.00006)
 
+[sub_resource type="Shader" id="Shader_radial_reveal"]
+code = "shader_type canvas_item;\n\nuniform float reveal : hint_range(0.0, 1.0) = 0.0;\n\nvoid fragment() {\n\tvec2 pixel_position = (UV - vec2(0.5)) / SCREEN_PIXEL_SIZE;\n\tfloat shortest_side = min(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);\n\tfloat distance_from_center = length(pixel_position) / shortest_side;\n\tfloat visible_radius = reveal * 0.9;\n\tfloat darkness = 1.0 - smoothstep(visible_radius - 0.04, visible_radius + 0.04, distance_from_center);\n\tCOLOR = vec4(0.0, 0.0, 0.0, 1.0 - darkness);\n}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_radial_reveal"]
+shader = SubResource("Shader_radial_reveal")
+shader_parameter/reveal = 0.0
+
 [node name="Main" type="Node" unique_id=1223696925]
 script = ExtResource("1_vjwby")
 customer_scene = ExtResource("4_5qjmp")
@@ -93,3 +100,16 @@ position = Vector2(773, 471)
 
 [node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
 position = Vector2(194, 402)
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=115628731]
+layer = 100
+
+[node name="Reveal" type="ColorRect" parent="TransitionLayer" unique_id=115628732]
+material = SubResource("ShaderMaterial_radial_reveal")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
