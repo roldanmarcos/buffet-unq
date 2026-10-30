@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxrhxbupwpubq" path="res://icon.svg" id="1_3py4g"]
 [ext_resource type="Script" uid="uid://c0pyt22aswnqd" path="res://src/entities/player/Player.gd" id="1_awdo7"]
-[ext_resource type="Texture2D" uid="uid://bt00ve30rkqlr" path="res://assets/player.png" id="2_vna0p"]
+[ext_resource type="SpriteFrames" uid="uid://busckfx5dmojm" path="res://assets/characters/chico.tres" id="2_chico"]
 [ext_resource type="AudioStream" uid="uid://ml8gw7s261mf" path="res://assets/sound/footstep.mp3" id="4_5ow34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3py4g"]
@@ -11,9 +11,9 @@ size = Vector2(72, 31)
 [node name="Player" type="CharacterBody2D" unique_id=209728546]
 script = ExtResource("1_awdo7")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=687489494]
-scale = Vector2(0.5703125, 0.8984375)
-texture = ExtResource("2_vna0p")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=687489494]
+sprite_frames = ExtResource("2_chico")
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=132959454]
 position = Vector2(0, -1.5)

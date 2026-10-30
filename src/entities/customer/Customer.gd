@@ -54,10 +54,10 @@ func _ready() -> void:
 	bar.add_theme_stylebox_override("fill", fill_style)
 	_update_bar()
 
-	Items.apply_icon(bubble_icon, order, 40)
+	Items.apply_icon(bubble_icon, order, Items.BUBBLE_SIZE)
 	if order == "pancho":
-		# La imagen del pancho es vertical: en el globo va acostado y más grande.
-		Items.apply_icon(bubble_icon, order, 55)
+		# La imagen del pancho es vertical y finita: en el globo va acostada y un poco más larga.
+		Items.apply_icon(bubble_icon, order, Items.BUBBLE_SIZE * 1.25)
 		bubble_icon.rotation_degrees = 90.0
 	bubble.visible = false
 

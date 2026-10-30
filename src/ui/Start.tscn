@@ -21,6 +21,16 @@
 [ext_resource type="Texture2D" uid="uid://b4vubcywyqe3v" path="res://assets/ui/boton_atras.png" id="19_atras"]
 [ext_resource type="Texture2D" uid="uid://8is1ilti8ip3" path="res://assets/ui/boton_atras_pressed.png" id="20_atrasp"]
 [ext_resource type="Texture2D" uid="uid://bq7gvkxrulwdu" path="res://assets/ui/boton_atras_hover.png" id="21_atrash"]
+[ext_resource type="Texture2D" uid="uid://b2agaxo5x87c4" path="res://assets/characters/chico.png" id="22_chico"]
+[ext_resource type="Texture2D" uid="uid://bajn8wrm15mgk" path="res://assets/characters/chica.png" id="23_chica"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chico"]
+atlas = ExtResource("22_chico")
+region = Rect2(416, 0, 104, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chica"]
+atlas = ExtResource("23_chica")
+region = Rect2(416, 0, 104, 160)
 
 [node name="Start" type="Control" unique_id=279461074]
 texture_filter = 1
@@ -129,6 +139,81 @@ offset_right = 609.0
 offset_bottom = 163.0
 texture = ExtResource("4_0ij05")
 expand_mode = 1
+
+[node name="CharacterLayer" type="CenterContainer" parent="." unique_id=1418820537]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Characters" type="Control" parent="CharacterLayer" unique_id=964200318]
+custom_minimum_size = Vector2(900, 648)
+layout_mode = 2
+
+[node name="MenuPanel" type="TextureRect" parent="CharacterLayer/Characters" unique_id=1729305841]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 181.0
+offset_right = 680.0
+offset_bottom = 533.0
+texture = ExtResource("8_7ct7u")
+
+[node name="TitleLabel" type="Label" parent="CharacterLayer/Characters" unique_id=1093368215]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 250.0
+offset_top = 210.0
+offset_right = 650.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 28
+text = "Elegí tu personaje"
+horizontal_alignment = 1
+
+[node name="ChicoButton" type="TextureButton" parent="CharacterLayer/Characters" unique_id=1340291706]
+texture_filter = 2
+layout_mode = 0
+offset_left = 286.0
+offset_top = 270.0
+offset_right = 403.0
+offset_bottom = 450.0
+pivot_offset = Vector2(58.5, 90)
+texture_normal = SubResource("AtlasTexture_chico")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChicaButton" type="TextureButton" parent="CharacterLayer/Characters" unique_id=711594803]
+texture_filter = 2
+layout_mode = 0
+offset_left = 497.0
+offset_top = 270.0
+offset_right = 614.0
+offset_bottom = 450.0
+pivot_offset = Vector2(58.5, 90)
+texture_normal = SubResource("AtlasTexture_chica")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Logo" type="TextureRect" parent="CharacterLayer/Characters" unique_id=268931745]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 76.0
+offset_right = 609.0
+offset_bottom = 163.0
+texture = ExtResource("4_0ij05")
+expand_mode = 1
+
+[node name="BackButton" type="TextureButton" parent="CharacterLayer/Characters" unique_id=1857246301]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 85.0
+texture_normal = ExtResource("19_atras")
+texture_pressed = ExtResource("20_atrasp")
+texture_hover = ExtResource("21_atrash")
 
 [node name="LevelLayer" type="CenterContainer" parent="." unique_id=1532904417]
 visible = false

@@ -27,8 +27,26 @@ const MAX_WAITING := {
 	"cafe": 2
 }
 
+# Tamaños (en píxeles, del objeto visible) según dónde se muestra.
+const BUBBLE_SIZE := 40.0
+const HAND_SIZE := 45.0
+
+static var _icons := {}
+
 static func icon(item: String) -> Texture2D:
-	return load(ICON_PATHS[item]) if ICON_PATHS.has(item) else null
+	if not ICON_PATHS.has(item):
+		return null
+	if not _icons.has(item):
+		_icons[item] = _trimmed(load(ICON_PATHS[item]))
+	return _icons[item]
+
+# Recorta el borde transparente de la imagen: así el tamaño que se pide
+# es el del objeto que se ve, y todos quedan parejos (el café tenía mucho margen).
+static func _trimmed(tex: Texture2D) -> Texture2D:
+	var atlas := AtlasTexture.new()
+	atlas.atlas = tex
+	atlas.region = tex.get_image().get_used_rect()
+	return atlas
 
 static func random_order(orderable: Array = ORDERABLE) -> String:
 	return orderable.pick_random()
