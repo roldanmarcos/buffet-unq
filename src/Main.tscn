@@ -111,6 +111,10 @@ position = Vector2(827, 211)
 
 [node name="LevelTimer" type="Timer" parent="." unique_id=1797436448]
 
+[node name="DoorSound" type="AudioStreamPlayer" parent="." unique_id=1797436449]
+
+[node name="ClientLostSound" type="AudioStreamPlayer" parent="." unique_id=1797436450]
+
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
 position = Vector2(65.99999, 194.99998)
 scale = Vector2(0.99999994, 0.99999994)

@@ -1,5 +1,8 @@
 extends Node
 
+const DOOR_SOUND := preload("res://assets/sound/door.mp3")
+const CLIENT_LOST_SOUND := preload("res://assets/sound/client_lost.mp3")
+
 @export var customer_scene: PackedScene
 @export var money_scene: PackedScene
 @export var level_seconds: float = 90.0
@@ -19,11 +22,15 @@ var pending_money := 0
 @onready var transition_rect: ColorRect = $TransitionLayer/Reveal
 @onready var transition_material: ShaderMaterial = transition_rect.material
 @onready var lost_customer_flash: ColorRect = $LostCustomerFlashLayer/Flash
+@onready var door_sound: AudioStreamPlayer = $DoorSound
+@onready var client_lost_sound: AudioStreamPlayer = $ClientLostSound
 
 var lost_customer_flash_tween: Tween
 
 
 func _ready() -> void:
+	door_sound.stream = DOOR_SOUND
+	client_lost_sound.stream = CLIENT_LOST_SOUND
 	get_tree().paused = true
 	transition_material.set_shader_parameter("reveal", 0.0)
 	var reveal_tween := create_tween()
@@ -59,6 +66,7 @@ func _spawn_customer(slot: Marker2D) -> void:
 	c.order = Items.random_order()
 	c.set_meta("money_pos", slot.get_node("MoneyPos").global_position)
 	add_child(c)
+	door_sound.play()
 	c.setup($Entrada.global_position, slot.global_position)
 	c.served.connect(_on_customer_served)
 	c.left_unserved.connect(_on_customer_left)
@@ -79,6 +87,7 @@ func _on_customer_served(customer: Customer) -> void:
 func _on_customer_left(_customer: Customer) -> void:
 	active_customers -= 1
 	lost_customers += 1
+	client_lost_sound.play()
 	_show_lost_customer_flash()
 	game_hud.set_lives(3 - lost_customers)
 	if lost_customers >= 3:

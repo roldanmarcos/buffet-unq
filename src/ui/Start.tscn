@@ -66,6 +66,8 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[node name="IntroSound" type="AudioStreamPlayer" parent="." unique_id=1587044245]
+
 [node name="MenuLayer" type="CenterContainer" parent="." unique_id=359415266]
 visible = false
 layout_mode = 1

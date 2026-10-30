@@ -1,6 +1,7 @@
 extends Control
 
 const GAME_SCENE := "res://src/Main.tscn"
+const START_SOUND := preload("res://assets/sound/start.mp3")
 
 @onready var intro_layer: CenterContainer = $IntroLayer
 @onready var menu_layer: CenterContainer = $MenuLayer
@@ -22,6 +23,8 @@ func _ready() -> void:
 		intro_layer.hide()
 		menu_layer.show()
 		return
+	$IntroSound.stream = START_SOUND
+	$IntroSound.play()
 	intro_timer.start()
 
 

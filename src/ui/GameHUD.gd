@@ -56,6 +56,7 @@ func _on_main_menu_pressed() -> void:
 func show_level_result(won: bool, score: int) -> void:
 	pause_menu.hide()
 	result_title.text = "¡Nivel completado!" if won else "Perdiste: se fueron 3 clientes"
+	result_title.add_theme_font_size_override("font_size", 32 if won else 22)
 	result_score.text = "Recaudaste: $%d" % score
 	result_menu.show()
 	result_sound.stream = WIN_SOUND if won else LOST_SOUND
