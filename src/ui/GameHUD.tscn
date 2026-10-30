@@ -88,6 +88,21 @@ text = "1:25"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LevelLabel" type="Label" parent="UI" unique_id=1874302611]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 64
+text = "Nivel 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PauseMenu" type="Control" parent="UI" unique_id=1518934821]
 visible = false
 layout_mode = 1
@@ -247,6 +262,17 @@ offset_bottom = 143.0
 texture_normal = ExtResource("9_suftc")
 texture_pressed = ExtResource("10_4qqkk")
 texture_hover = ExtResource("11_4ldyg")
+
+[node name="NextLevelButton" type="TextureButton" parent="UI/ResultMenu/CenterContainer/ResultOptions" unique_id=1630458127]
+visible = false
+layout_mode = 0
+offset_left = -188.0
+offset_top = 61.0
+offset_right = 172.0
+offset_bottom = 143.0
+texture_normal = ExtResource("6_y2qw8")
+texture_pressed = ExtResource("7_yl4el")
+texture_hover = ExtResource("8_kf8uh")
 
 [node name="LivesPanel" type="TextureRect" parent="UI" unique_id=359548966]
 layout_mode = 0

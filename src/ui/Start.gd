@@ -34,6 +34,7 @@ func _on_intro_timer_timeout() -> void:
 
 
 func _on_start_pressed() -> void:
+	Levels.set_current(get_tree(), 0)
 	get_tree().change_scene_to_file(GAME_SCENE)
 
 

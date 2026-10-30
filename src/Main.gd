@@ -5,10 +5,9 @@ const CLIENT_LOST_SOUND := preload("res://assets/sound/client_lost.mp3")
 
 @export var customer_scene: PackedScene
 @export var money_scene: PackedScene
-@export var level_seconds: float = 90.0
-@export var spawn_delay_min: float = 2.0
-@export var spawn_delay_max: float = 4.0
 
+var level_index := 0
+var level: Dictionary
 var level_over := false
 var time_up := false 
 var money := 0
@@ -29,6 +28,14 @@ var lost_customer_flash_tween: Tween
 
 
 func _ready() -> void:
+	level_index = Levels.current(get_tree())
+	level = Levels.data(level_index)
+	if not level.orderable.has("pancho"):
+		$HotDogs.queue_free()
+		$BreadBasket.queue_free()
+	else:
+		$HotDogs.visible = true
+		$BreadBasket.visible = true
 	door_sound.stream = DOOR_SOUND
 	client_lost_sound.stream = CLIENT_LOST_SOUND
 	get_tree().paused = true
@@ -40,14 +47,16 @@ func _ready() -> void:
 	$CashRegister.cash_deposited.connect(_on_cash_deposited)
 	game_hud.main_menu_requested.connect(_on_main_menu_requested)
 	game_hud.restart_requested.connect(_on_restart_requested)
+	game_hud.next_level_requested.connect(_on_next_level_requested)
 
 func _finish_intro() -> void:
 	transition_layer.visible = false
 	get_tree().paused = false
 	level_timer.one_shot = true
-	level_timer.wait_time = level_seconds
+	level_timer.wait_time = level.seconds
 	level_timer.timeout.connect(_on_level_timer_timeout)
 	level_timer.start()
+	game_hud.show_level_intro(level_index + 1)
 	_schedule_spawn($Lugar1, 0.0)
 	_schedule_spawn($Lugar2, 5.0)
 	_schedule_spawn($Lugar3, 7.0)
@@ -63,7 +72,8 @@ func _spawn_customer(slot: Marker2D) -> void:
 		return
 	active_customers += 1
 	var c: Customer = customer_scene.instantiate()
-	c.order = Items.random_order()
+	c.order = Items.random_order(_available_orders())
+	c.max_patience = Items.patience(c.order) * level.patience_multiplier
 	c.set_meta("money_pos", slot.get_node("MoneyPos").global_position)
 	add_child(c)
 	door_sound.play()
@@ -72,14 +82,27 @@ func _spawn_customer(slot: Marker2D) -> void:
 	c.left_unserved.connect(_on_customer_left)
 	c.departed.connect(_on_customer_departed.bind(slot))
 
+func _available_orders() -> Array:
+	var options: Array = level.orderable.filter(
+		func(item: String) -> bool: return Items.can_order(item, _waiting_orders(item))
+	)
+	return options if not options.is_empty() else level.orderable
+
+func _waiting_orders(item: String) -> int:
+	var count := 0
+	for child in get_children():
+		if child is Customer and child.state != Customer.State.LEAVING and child.order == item:
+			count += 1
+	return count
+
 func _on_customer_departed(_customer: Customer, slot: Marker2D) -> void:
-	_schedule_spawn(slot, randf_range(spawn_delay_min, spawn_delay_max))
+	_schedule_spawn(slot, randf_range(level.spawn_delay_min, level.spawn_delay_max))
 	
 func _on_customer_served(customer: Customer) -> void:
 	active_customers -= 1
-	pending_money += 1
 	var m: Money = money_scene.instantiate()
 	m.value = Items.price(customer.order)
+	pending_money += m.value
 	add_child(m)
 	m.global_position = customer.get_meta("money_pos")
 
@@ -107,7 +130,7 @@ func _show_lost_customer_flash() -> void:
 	lost_customer_flash_tween.tween_callback(func(): lost_customer_flash.visible = false)
 
 func _on_cash_deposited(amount: int) -> void:
-	pending_money -= 1
+	pending_money -= amount
 	money += amount
 	game_hud.set_money(money)
 	_check_level_complete()
@@ -120,7 +143,13 @@ func _on_main_menu_requested() -> void:
 func _on_restart_requested() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-	
+
+func _on_next_level_requested() -> void:
+	Levels.set_current(get_tree(), level_index + 1)
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+
 func _process(_delta: float) -> void:
 	if not level_over:
 		game_hud.set_time(level_timer.time_left)
@@ -141,4 +170,4 @@ func _end_level(won: bool) -> void:
 		return
 	level_over = true
 	level_timer.stop()
-	game_hud.show_level_result(won, money)
+	game_hud.show_level_result(won, money, level_index + 1, Levels.has_next(level_index))
