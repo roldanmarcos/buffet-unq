@@ -88,6 +88,9 @@ autostart = true
 
 [node name="IntroSound" type="AudioStreamPlayer" parent="." unique_id=1587044245]
 
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1587044246]
+volume_db = -3.0
+
 [node name="MenuLayer" type="CenterContainer" parent="." unique_id=359415266]
 visible = false
 layout_mode = 1

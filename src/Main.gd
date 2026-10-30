@@ -2,6 +2,14 @@ extends Node
 
 const DOOR_SOUND := preload("res://assets/sound/door.mp3")
 const CLIENT_LOST_SOUND := preload("res://assets/sound/client_lost.mp3")
+const MUSIC := preload("res://assets/sound/music.ogg")
+const AMBIENCE := preload("res://assets/sound/ambience.ogg")
+const TICK_SOUND := preload("res://assets/sound/tick.ogg")
+
+const HURRY_SECONDS := 15.0
+const HURRY_MUSIC_PITCH := 1.1
+const TICK_SECONDS := 10
+const AMBIENCE_DB_PER_CUSTOMER := 2.5
 
 @export var customer_scene: PackedScene
 @export var money_scene: PackedScene
@@ -23,6 +31,13 @@ var pending_money := 0
 @onready var lost_customer_flash: ColorRect = $LostCustomerFlashLayer/Flash
 @onready var door_sound: AudioStreamPlayer = $DoorSound
 @onready var client_lost_sound: AudioStreamPlayer = $ClientLostSound
+@onready var music: AudioStreamPlayer = $Music
+@onready var ambience: AudioStreamPlayer = $Ambience
+@onready var tick_sound: AudioStreamPlayer = $TickSound
+@onready var ambience_base_db: float = ambience.volume_db
+
+var hurrying := false
+var last_tick_second := -1
 
 var lost_customer_flash_tween: Tween
 
@@ -38,6 +53,11 @@ func _ready() -> void:
 		$BreadBasket.visible = true
 	door_sound.stream = DOOR_SOUND
 	client_lost_sound.stream = CLIENT_LOST_SOUND
+	music.stream = MUSIC
+	music.play()
+	ambience.stream = AMBIENCE
+	ambience.play()
+	tick_sound.stream = TICK_SOUND
 	get_tree().paused = true
 	transition_material.set_shader_parameter("reveal", 0.0)
 	var reveal_tween := create_tween()
@@ -87,6 +107,13 @@ func _available_orders() -> Array:
 		func(item: String) -> bool: return Items.can_order(item, _waiting_orders(item))
 	)
 	return options if not options.is_empty() else level.orderable
+
+func _waiting_customers() -> int:
+	var count := 0
+	for child in get_children():
+		if child is Customer and child.state == Customer.State.WAITING:
+			count += 1
+	return count
 
 func _waiting_orders(item: String) -> int:
 	var count := 0
@@ -150,12 +177,32 @@ func _on_next_level_requested() -> void:
 	get_tree().reload_current_scene()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not level_over:
 		game_hud.set_time(level_timer.time_left)
+		_update_tension(level_timer.time_left)
+	var target_db := ambience_base_db + AMBIENCE_DB_PER_CUSTOMER * _waiting_customers()
+	ambience.volume_db = lerpf(ambience.volume_db, target_db, delta * 2.0)
+
+func _update_tension(time_left: float) -> void:
+	if time_up or time_left <= 0.0:
+		return
+	if not hurrying and time_left <= HURRY_SECONDS:
+		hurrying = true
+		create_tween().tween_property(music, "pitch_scale", HURRY_MUSIC_PITCH, 1.0)
+	var second := ceili(time_left)
+	if second <= TICK_SECONDS and second != last_tick_second:
+		last_tick_second = second
+		tick_sound.pitch_scale = 1.0 if second % 2 == 0 else 0.8
+		tick_sound.play()
+
+func _calm_music() -> void:
+	hurrying = false
+	music.pitch_scale = 1.0
 
 func _on_level_timer_timeout() -> void:
 	time_up = true
+	_calm_music()
 	game_hud.set_time(0.0)
 	_check_level_complete()
 
@@ -170,6 +217,8 @@ func _end_level(won: bool) -> void:
 		return
 	level_over = true
 	level_timer.stop()
+	_calm_music()
+	music.volume_db -= 6.0
 	if won and Levels.has_next(level_index):
 		SaveData.unlock_level(level_index + 1)
 	game_hud.show_level_result(won, money, level_index + 1, Levels.has_next(level_index))

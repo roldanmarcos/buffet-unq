@@ -2,6 +2,7 @@ extends Control
 
 const GAME_SCENE := "res://src/Main.tscn"
 const START_SOUND := preload("res://assets/sound/start.mp3")
+const MENU_MUSIC := preload("res://assets/sound/music.ogg")
 
 @onready var intro_layer: CenterContainer = $IntroLayer
 @onready var menu_layer: CenterContainer = $MenuLayer
@@ -36,11 +37,13 @@ func _ready() -> void:
 	intro_timer.timeout.connect(_on_intro_timer_timeout)
 	get_viewport().size_changed.connect(_center_tutorial_sprite)
 	_center_tutorial_sprite()
+	$MenuMusic.stream = MENU_MUSIC
 	if get_tree().has_meta("returning_to_main_menu"):
 		get_tree().remove_meta("returning_to_main_menu")
 		intro_timer.stop()
 		intro_layer.hide()
 		menu_layer.show()
+		$MenuMusic.play()
 		return
 	$IntroSound.stream = START_SOUND
 	$IntroSound.play()
@@ -50,6 +53,7 @@ func _ready() -> void:
 func _on_intro_timer_timeout() -> void:
 	intro_layer.hide()
 	menu_layer.show()
+	$MenuMusic.play()
 
 
 func _on_start_pressed() -> void:
@@ -59,7 +63,6 @@ func _on_start_pressed() -> void:
 
 func _on_character_chosen(character: String) -> void:
 	get_tree().set_meta(Player.CHARACTER_META, character)
-	# Si todavía no ganó ningún nivel, arranca directo en el 1.
 	if SaveData.unlocked_level() == 0:
 		_start_level(0)
 		return

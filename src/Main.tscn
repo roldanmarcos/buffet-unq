@@ -120,6 +120,16 @@ position = Vector2(827, 211)
 
 [node name="ClientLostSound" type="AudioStreamPlayer" parent="." unique_id=1797436450]
 
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1797436451]
+process_mode = 3
+volume_db = -7.0
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1797436452]
+volume_db = -4.0
+
+[node name="TickSound" type="AudioStreamPlayer" parent="." unique_id=1797436453]
+volume_db = -2.0
+
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
 position = Vector2(65.99999, 194.99998)
 scale = Vector2(0.99999994, 0.99999994)

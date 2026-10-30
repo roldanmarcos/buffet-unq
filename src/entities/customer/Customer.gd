@@ -6,6 +6,7 @@ signal served(customer: Customer)
 signal left_unserved(customer: Customer)
 
 const WALK_SPEED := 200.0
+const BLINK_BELOW := 0.3
 
 @export var order: String = ""
 @export var max_patience: float = 15.0
@@ -14,6 +15,7 @@ enum State { ARRIVING, WAITING, LEAVING }
 var state := State.ARRIVING
 
 var patience: float
+var blink_time := 0.0
 var player: Player = null
 var slot_pos: Vector2
 var exit_pos: Vector2
@@ -56,7 +58,6 @@ func _ready() -> void:
 
 	Items.apply_icon(bubble_icon, order, Items.BUBBLE_SIZE)
 	if order == "pancho":
-		# La imagen del pancho es vertical y finita: en el globo va acostada y un poco más larga.
 		Items.apply_icon(bubble_icon, order, Items.BUBBLE_SIZE * 1.25)
 		bubble_icon.rotation_degrees = 90.0
 	bubble.visible = false
@@ -75,6 +76,7 @@ func _process(delta: float) -> void:
 		State.WAITING:
 			patience -= delta
 			_update_bar()
+			_update_blink(delta)
 			if patience <= 0.0:
 				_start_leaving(true)
 		State.LEAVING:
@@ -126,6 +128,15 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body == player:
 		player = null
+
+func _update_blink(delta: float) -> void:
+	var ratio := patience / max_patience
+	if ratio > BLINK_BELOW:
+		bar.modulate.a = 1.0
+		return
+	blink_time += delta
+	var speed := lerpf(5.0, 12.0, 1.0 - ratio / BLINK_BELOW)
+	bar.modulate.a = 0.3 + 0.7 * absf(cos(blink_time * speed))
 
 func _update_bar() -> void:
 	bar.value = patience
