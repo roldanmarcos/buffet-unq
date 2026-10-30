@@ -170,4 +170,6 @@ func _end_level(won: bool) -> void:
 		return
 	level_over = true
 	level_timer.stop()
+	if won and Levels.has_next(level_index):
+		SaveData.unlock_level(level_index + 1)
 	game_hud.show_level_result(won, money, level_index + 1, Levels.has_next(level_index))

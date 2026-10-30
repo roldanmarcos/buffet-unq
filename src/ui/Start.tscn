@@ -11,6 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://b5ociekd5pkll" path="res://assets/ui/boton_tutorial.png" id="9_7ct7u"]
 [ext_resource type="Texture2D" uid="uid://te33oga87nya" path="res://assets/ui/boton_tutorial_pressed.png" id="10_nl4r6"]
 [ext_resource type="Texture2D" uid="uid://b88kjufmu7bvd" path="res://assets/ui/boton_tutorial_hover.png" id="11_ebmyr"]
+[ext_resource type="Texture2D" uid="uid://pxkf15f4n6ri" path="res://assets/ui/boton_nivel_1.png" id="12_nivel1"]
+[ext_resource type="Texture2D" uid="uid://c653gg3qr06pn" path="res://assets/ui/boton_nivel_1_pressed.png" id="13_nivel1p"]
+[ext_resource type="Texture2D" uid="uid://bgju4xgmqvq78" path="res://assets/ui/boton_nivel_1_hover.png" id="14_nivel1h"]
+[ext_resource type="Texture2D" uid="uid://cfjxiud3xtmm2" path="res://assets/ui/boton_nivel_2.png" id="15_nivel2"]
+[ext_resource type="Texture2D" uid="uid://bgge1eal2npkr" path="res://assets/ui/boton_nivel_2_pressed.png" id="16_nivel2p"]
+[ext_resource type="Texture2D" uid="uid://ccwsdcvvdiu4g" path="res://assets/ui/boton_nivel_2_hover.png" id="17_nivel2h"]
+[ext_resource type="Texture2D" uid="uid://b03hs3nd2wlbx" path="res://assets/ui/boton_nivel_2_bloqueado.png" id="18_nivel2b"]
+[ext_resource type="Texture2D" uid="uid://b4vubcywyqe3v" path="res://assets/ui/boton_atras.png" id="19_atras"]
+[ext_resource type="Texture2D" uid="uid://8is1ilti8ip3" path="res://assets/ui/boton_atras_pressed.png" id="20_atrasp"]
+[ext_resource type="Texture2D" uid="uid://bq7gvkxrulwdu" path="res://assets/ui/boton_atras_hover.png" id="21_atrash"]
 
 [node name="Start" type="Control" unique_id=279461074]
 texture_filter = 1
@@ -119,6 +129,69 @@ offset_right = 609.0
 offset_bottom = 163.0
 texture = ExtResource("4_0ij05")
 expand_mode = 1
+
+[node name="LevelLayer" type="CenterContainer" parent="." unique_id=1532904417]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Levels" type="Control" parent="LevelLayer" unique_id=1201487365]
+custom_minimum_size = Vector2(900, 648)
+layout_mode = 2
+
+[node name="MenuPanel" type="TextureRect" parent="LevelLayer/Levels" unique_id=874120593]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 181.0
+offset_right = 680.0
+offset_bottom = 533.0
+texture = ExtResource("8_7ct7u")
+
+[node name="Level1Button" type="TextureButton" parent="LevelLayer/Levels" unique_id=1655302874]
+custom_minimum_size = Vector2(260, 52)
+layout_mode = 0
+offset_left = 270.0
+offset_top = 248.0
+offset_right = 630.0
+offset_bottom = 330.0
+texture_normal = ExtResource("12_nivel1")
+texture_pressed = ExtResource("13_nivel1p")
+texture_hover = ExtResource("14_nivel1h")
+
+[node name="Level2Button" type="TextureButton" parent="LevelLayer/Levels" unique_id=1078663320]
+custom_minimum_size = Vector2(260, 52)
+layout_mode = 0
+offset_left = 269.0
+offset_top = 373.0
+offset_right = 629.0
+offset_bottom = 455.0
+texture_normal = ExtResource("15_nivel2")
+texture_pressed = ExtResource("16_nivel2p")
+texture_hover = ExtResource("17_nivel2h")
+texture_disabled = ExtResource("18_nivel2b")
+
+[node name="Logo" type="TextureRect" parent="LevelLayer/Levels" unique_id=391846275]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 76.0
+offset_right = 609.0
+offset_bottom = 163.0
+texture = ExtResource("4_0ij05")
+expand_mode = 1
+
+[node name="BackButton" type="TextureButton" parent="LevelLayer/Levels" unique_id=1987316548]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 85.0
+texture_normal = ExtResource("19_atras")
+texture_pressed = ExtResource("20_atrasp")
+texture_hover = ExtResource("21_atrash")
 
 [node name="TutorialLayer" type="Control" parent="." unique_id=667132243]
 visible = false
