@@ -70,6 +70,7 @@ func hold(item: String, value: int = 0) -> void:
 	held_item = item
 	held_value = value
 	Items.apply_icon(held_item_visual, item, 60)
+	held_item_visual.rotation_degrees = 90.0 if item == "pancho" else 0.0
 	held_item_visual.visible = true
 
 func has_item() -> bool:

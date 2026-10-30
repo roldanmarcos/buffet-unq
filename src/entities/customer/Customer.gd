@@ -55,6 +55,10 @@ func _ready() -> void:
 	_update_bar()
 
 	Items.apply_icon(bubble_icon, order, 40)
+	if order == "pancho":
+		# La imagen del pancho es vertical: en el globo va acostado y más grande.
+		Items.apply_icon(bubble_icon, order, 55)
+		bubble_icon.rotation_degrees = 90.0
 	bubble.visible = false
 
 	$InteractionArea.body_entered.connect(_on_body_entered)

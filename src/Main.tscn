@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/customer/Customer.tscn" id="4_5qjmp"]
 [ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
 [ext_resource type="PackedScene" uid="uid://d0i24t584hfqe" path="res://src/entities/machine/HotDogs.tscn" id="8_0ri8u"]
+[ext_resource type="PackedScene" uid="uid://dtp2bj4tldshs" path="res://src/entities/machine/BreadBasket.tscn" id="8_bread"]
 [ext_resource type="PackedScene" uid="uid://vxse62604jmo" path="res://src/entities/machine/CashRegister.tscn" id="8_fh42b"]
 [ext_resource type="PackedScene" uid="uid://cpo5dc1j6l7pq" path="res://src/environment/MesadaFrente.tscn" id="8_k2i6c"]
 [ext_resource type="PackedScene" uid="uid://cd4pyjm0ij4wm" path="res://src/entities/machine/TrashCan.tscn" id="9_trash"]
@@ -102,7 +103,11 @@ position = Vector2(238, 148)
 
 [node name="HotDogs" parent="." unique_id=940914804 instance=ExtResource("8_0ri8u")]
 visible = false
-position = Vector2(445, 143)
+position = Vector2(388, 143)
+
+[node name="BreadBasket" parent="." unique_id=1765731571 instance=ExtResource("8_bread")]
+visible = false
+position = Vector2(532, 168)
 
 [node name="TrashCan" parent="." unique_id=788664407 instance=ExtResource("9_trash")]
 position = Vector2(827, 211)

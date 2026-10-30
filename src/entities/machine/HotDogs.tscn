@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d0i24t584hfqe"]
 
+[ext_resource type="Script" uid="uid://7wedmc45fdhj" path="res://src/entities/machine/HotDogs.gd" id="1_hotdg"]
 [ext_resource type="Texture2D" uid="uid://styqtb6d6x6i" path="res://assets/hotDogs.png" id="1_uiljx"]
-[ext_resource type="Texture2D" uid="uid://capkfiqs803m" path="res://assets/hotDog.png" id="2_uiljx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
 size = Vector2(86, 91)
@@ -10,6 +10,7 @@ size = Vector2(86, 91)
 size = Vector2(86, 201)
 
 [node name="HotDogs" type="StaticBody2D" unique_id=940246524]
+script = ExtResource("1_hotdg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=915455090]
 scale = Vector2(0.09078657, 0.099529)
@@ -24,9 +25,12 @@ shape = SubResource("RectangleShape2D_t37fl")
 position = Vector2(0, 55.5)
 shape = SubResource("RectangleShape2D_5qjmp")
 
-[node name="PrepTimer" type="Timer" parent="." unique_id=1231842902]
+[node name="Slot1" type="Sprite2D" parent="." unique_id=1433429031]
+position = Vector2(-19, 8)
 
-[node name="HotDog" type="Sprite2D" parent="." unique_id=1433429031]
-position = Vector2(3.9999995, 15)
-scale = Vector2(0.035115257, 0.035115257)
-texture = ExtResource("2_uiljx")
+[node name="PrepTimer" type="Timer" parent="Slot1" unique_id=1231842902]
+
+[node name="Slot2" type="Sprite2D" parent="." unique_id=1264854050]
+position = Vector2(5, 8)
+
+[node name="PrepTimer" type="Timer" parent="Slot2" unique_id=1696270745]

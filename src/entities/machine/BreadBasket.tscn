@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dtp2bj4tldshs"]
+
+[ext_resource type="Script" uid="uid://dhfp4b2gwat0p" path="res://src/entities/machine/BreadBasket.gd" id="1_bread"]
+[ext_resource type="Texture2D" uid="uid://h7g7e2cdfgke" path="res://assets/breadBasket.png" id="2_bread"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(70, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
+size = Vector2(50, 201)
+
+[node name="BreadBasket" type="StaticBody2D" unique_id=403879685]
+script = ExtResource("1_bread")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1940914908]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_bread")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=900338412]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=711818307]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=114839291]
+position = Vector2(0, 35.5)
+shape = SubResource("RectangleShape2D_area")
