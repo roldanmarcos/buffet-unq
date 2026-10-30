@@ -11,7 +11,6 @@ const CHARACTERS := {
 	"chico": preload("res://assets/characters/chico.tres"),
 	"chica": preload("res://assets/characters/chica.tres"),
 }
-# Dónde se ve lo que lleva en la mano según para dónde mira.
 const HELD_ITEM_OFFSETS := {
 	"down": Vector2(-16, 20),
 	"up": Vector2(34, 12),
@@ -75,7 +74,7 @@ func _update_animation(direction: Vector2) -> void:
 		else:
 			facing = "down" if direction.y > 0.0 else "up"
 	var animation := ("walk_" if direction != Vector2.ZERO else "idle_") + facing
-	# De frente tiene cuadros con el brazo sujetando lo que lleva.
+
 	if facing == "down" and has_item():
 		animation += "_holding"
 	if sprite.animation != animation:

@@ -14,20 +14,17 @@ const PRICES := {
 	"cafe": 15,
 	"pancho": 20
 }
-# Segundos que espera un cliente según lo que pide.
-# Lo que hay que preparar en una máquina da más tiempo.
+
 const PATIENCE := {
 	"gaseosa": 15.0,
 	"cafe": 25.0,
 	"pancho": 25.0
 }
-# Cuántos clientes pueden estar esperando el mismo pedido a la vez.
-# Los productos que no están acá no tienen límite.
+
 const MAX_WAITING := {
 	"cafe": 2
 }
 
-# Tamaños (en píxeles, del objeto visible) según dónde se muestra.
 const BUBBLE_SIZE := 40.0
 const HAND_SIZE := 45.0
 
@@ -40,8 +37,6 @@ static func icon(item: String) -> Texture2D:
 		_icons[item] = _trimmed(load(ICON_PATHS[item]))
 	return _icons[item]
 
-# Recorta el borde transparente de la imagen: así el tamaño que se pide
-# es el del objeto que se ve, y todos quedan parejos (el café tenía mucho margen).
 static func _trimmed(tex: Texture2D) -> Texture2D:
 	var atlas := AtlasTexture.new()
 	atlas.atlas = tex

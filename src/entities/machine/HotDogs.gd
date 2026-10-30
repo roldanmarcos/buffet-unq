@@ -1,7 +1,5 @@
 extends Machine
 
-# Cada lugar de la máquina cocina un pancho por separado:
-# se deja un pan, pasa el tiempo de preparación y queda el pancho listo.
 enum SlotState { EMPTY, COOKING, READY }
 
 const SLOT_ICON_SIZE := 40.0
