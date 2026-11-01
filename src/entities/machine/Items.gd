@@ -46,6 +46,15 @@ static func _trimmed(tex: Texture2D) -> Texture2D:
 static func random_order(orderable: Array = ORDERABLE) -> String:
 	return orderable.pick_random()
 
+static func random_orders(orderable: Array) -> Array[String]:
+	var choices: Array = orderable.duplicate()
+	choices.shuffle()
+	var count := randi_range(1, mini(2, choices.size()))
+	var result: Array[String] = []
+	for i in count:
+		result.append(choices[i])
+	return result
+
 static func price(item: String) -> int:
 	return PRICES.get(item, 10)
 

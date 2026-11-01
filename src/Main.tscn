@@ -122,10 +122,10 @@ position = Vector2(827, 211)
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1797436451]
 process_mode = 3
-volume_db = -7.0
+volume_db = -11.028
 
 [node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1797436452]
-volume_db = -4.0
+volume_db = -13.887
 
 [node name="TickSound" type="AudioStreamPlayer" parent="." unique_id=1797436453]
 volume_db = -2.0

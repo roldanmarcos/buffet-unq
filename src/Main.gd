@@ -92,8 +92,14 @@ func _spawn_customer(slot: Marker2D) -> void:
 		return
 	active_customers += 1
 	var c: Customer = customer_scene.instantiate()
-	c.order = Items.random_order(_available_orders())
-	c.max_patience = Items.patience(c.order) * level.patience_multiplier
+	c.orders = Items.random_orders(_available_orders())
+	c.order = c.orders[0]
+	c.delivered_orders.resize(c.orders.size())
+	c.delivered_orders.fill(false)
+	var patience := 0.0
+	for item in c.orders:
+		patience = maxf(patience, Items.patience(item))
+	c.max_patience = patience * level.patience_multiplier
 	c.set_meta("money_pos", slot.get_node("MoneyPos").global_position)
 	add_child(c)
 	door_sound.play()
@@ -118,8 +124,10 @@ func _waiting_customers() -> int:
 func _waiting_orders(item: String) -> int:
 	var count := 0
 	for child in get_children():
-		if child is Customer and child.state != Customer.State.LEAVING and child.order == item:
-			count += 1
+		if child is Customer and child.state != Customer.State.LEAVING:
+			for i in child.orders.size():
+				if child.orders[i] == item and not child.delivered_orders[i]:
+					count += 1
 	return count
 
 func _on_customer_departed(_customer: Customer, slot: Marker2D) -> void:
@@ -128,7 +136,9 @@ func _on_customer_departed(_customer: Customer, slot: Marker2D) -> void:
 func _on_customer_served(customer: Customer) -> void:
 	active_customers -= 1
 	var m: Money = money_scene.instantiate()
-	m.value = Items.price(customer.order)
+	m.value = 0
+	for item in customer.orders:
+		m.value += Items.price(item)
 	pending_money += m.value
 	add_child(m)
 	m.global_position = customer.get_meta("money_pos")

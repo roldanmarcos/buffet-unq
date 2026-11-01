@@ -9,6 +9,8 @@ const WALK_SPEED := 200.0
 const BLINK_BELOW := 0.3
 
 @export var order: String = ""
+var orders: Array[String] = []
+var delivered_orders: Array[bool] = []
 @export var max_patience: float = 15.0
 
 enum State { ARRIVING, WAITING, LEAVING }
@@ -56,10 +58,10 @@ func _ready() -> void:
 	bar.add_theme_stylebox_override("fill", fill_style)
 	_update_bar()
 
-	Items.apply_icon(bubble_icon, order, Items.BUBBLE_SIZE)
-	if order == "pancho":
-		Items.apply_icon(bubble_icon, order, Items.BUBBLE_SIZE * 1.25)
-		bubble_icon.rotation_degrees = 90.0
+	if orders.is_empty():
+		orders.append(order)
+		delivered_orders.append(false)
+	_update_bubble_orders()
 	bubble.visible = false
 
 	$InteractionArea.body_entered.connect(_on_body_entered)
@@ -88,10 +90,56 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("interact") or player == null:
 		return
-	if state == State.WAITING and player.held_item == order:
-		player.drop_item()
+	if state != State.WAITING:
+		return
+	var order_index := orders.find(player.held_item)
+	if order_index == -1 or delivered_orders[order_index]:
+		return
+	player.drop_item()
+	delivered_orders[order_index] = true
+	_update_bubble_orders()
+	if _all_orders_delivered():
 		served.emit(self)
 		_start_leaving(false)
+
+
+func _all_orders_delivered() -> bool:
+	for delivered in delivered_orders:
+		if not delivered:
+			return false
+	return true
+
+
+func _update_bubble_orders() -> void:
+	if not is_node_ready():
+		return
+	if orders.size() <= 1:
+		bubble_icon.position = Vector2(0, -113)
+		bubble_icon.rotation_degrees = 90.0 if orders[0] == "pancho" else 0.0
+		Items.apply_icon(bubble_icon, orders[0], Items.BUBBLE_SIZE * (1.25 if orders[0] == "pancho" else 1.0))
+		_set_check(bubble_icon, delivered_orders[0], 0)
+		return
+	var positions := [Vector2(-24, -113), Vector2(24, -113)]
+	for i in orders.size():
+		var icon: Sprite2D
+		if i == 0:
+			icon = bubble_icon
+		else:
+			icon = $Bubble.get_node_or_null("OrderIcon%d" % i) as Sprite2D
+			if icon == null:
+				icon = Sprite2D.new()
+				icon.name = "OrderIcon%d" % i
+				$Bubble.add_child(icon)
+		icon.position = positions[i]
+		icon.rotation_degrees = 90.0 if orders[i] == "pancho" else 0.0
+		Items.apply_icon(icon, orders[i], Items.BUBBLE_SIZE * (0.85 if orders[i] == "pancho" else 0.75))
+		_set_check(icon, delivered_orders[i], i)
+
+
+func _set_check(icon: Sprite2D, visible_check: bool, index: int) -> void:
+	var check := $Bubble.get_node("Check%d" % index) as Sprite2D
+	check.position = icon.position + Vector2(12, -12)
+	check.visible = visible_check
 
 
 func _follow_path(delta: float) -> bool:
