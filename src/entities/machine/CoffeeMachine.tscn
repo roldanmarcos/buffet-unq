@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2tj8ucy3ifcb" path="res://src/entities/machine/CoffeeMachine.gd" id="1_p5ome"]
 [ext_resource type="Texture2D" uid="uid://xk6ljthb4pg4" path="res://assets/coffeeMachine.png" id="2_xei2y"]
-[ext_resource type="Texture2D" uid="uid://dpqnj3p6vjbw2" path="res://assets/coffee.png" id="3_xei2y"]
+[ext_resource type="Texture2D" uid="uid://bifg5cccj3cff" path="res://assets/coffee.png" id="3_xei2y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
 size = Vector2(61, 91)
@@ -30,6 +30,6 @@ shape = SubResource("RectangleShape2D_5qjmp")
 [node name="PrepTimer" type="Timer" parent="." unique_id=1231842902]
 
 [node name="Cup" type="Sprite2D" parent="." unique_id=1433429031]
-position = Vector2(0, 19)
-scale = Vector2(0.052989133, 0.052989133)
+position = Vector2(0, 21.333)
+scale = Vector2(0.022835243, 0.022835242)
 texture = ExtResource("3_xei2y")

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://nb83n4xvib1q" path="res://assets/cloud.png" id="3_exle7"]
 [ext_resource type="Texture2D" uid="uid://bfr88nd6rnap7" path="res://assets/gaseosa.png" id="4_8agcf"]
 [ext_resource type="Texture2D" uid="uid://cfisj3lbqh1sw" path="res://assets/check.png" id="5_check"]
-[ext_resource type="SpriteFrames" path="res://src/entities/customer/customer_1_frames.tres" id="6_customer1"]
-[ext_resource type="SpriteFrames" path="res://src/entities/customer/customer_2_frames.tres" id="7_customer2"]
+[ext_resource type="SpriteFrames" uid="uid://cmqdxjhug75yk" path="res://src/entities/customer/customer_1_frames.tres" id="6_customer1"]
+[ext_resource type="SpriteFrames" uid="uid://c031fkxkhbgbu" path="res://src/entities/customer/customer_2_frames.tres" id="7_customer2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exle7"]
 size = Vector2(65, 131)
@@ -22,7 +22,7 @@ scale = Vector2(0.8, 0.8)
 sprite_frames = ExtResource("6_customer1")
 animation = &"idle_down"
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1565427335]
 visible = false
 position = Vector2(0.5, -1.5)
 scale = Vector2(0.8, 0.8)
@@ -54,7 +54,7 @@ texture = ExtResource("3_exle7")
 
 [node name="Icon" type="Sprite2D" parent="Bubble" unique_id=2007132207]
 position = Vector2(0, -114.01601)
-scale = Vector2(0.04, 0.036)
+scale = Vector2(0.05, 0.045)
 texture = ExtResource("4_8agcf")
 
 [node name="Check0" type="Sprite2D" parent="Bubble" unique_id=667256244]

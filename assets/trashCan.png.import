@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b727ea5wxgv64"
-path="res://.godot/imported/TrashCan.webp-d07dc20e83204bf7bcb3b8070866f8a9.ctex"
+uid="uid://brb424j8kmj4o"
+path="res://.godot/imported/trashCan.png-568a6702ef627de13466520de3c34e97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TrashCan.webp"
-dest_files=["res://.godot/imported/TrashCan.webp-d07dc20e83204bf7bcb3b8070866f8a9.ctex"]
+source_file="res://assets/trashCan.png"
+dest_files=["res://.godot/imported/trashCan.png-568a6702ef627de13466520de3c34e97.ctex"]
 
 [params]
 

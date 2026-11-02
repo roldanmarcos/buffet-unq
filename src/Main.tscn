@@ -14,9 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://cpo5dc1j6l7pq" path="res://src/environment/MesadaFrente.tscn" id="8_k2i6c"]
 [ext_resource type="PackedScene" uid="uid://cd4pyjm0ij4wm" path="res://src/entities/machine/TrashCan.tscn" id="9_trash"]
 [ext_resource type="PackedScene" uid="uid://co75ni8k6qdki" path="res://src/ui/GameHUD.tscn" id="10_hud"]
+[ext_resource type="Texture2D" uid="uid://1vabjfo5ot85" path="res://assets/deco/plant.png" id="15_x08y8"]
+[ext_resource type="Texture2D" uid="uid://dbrtebkfoic87" path="res://assets/deco/pc.png" id="16_cj10r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
-size = Vector2(901.00006, 212.00006)
+size = Vector2(901.00006, 214.00024)
 
 [sub_resource type="Shader" id="Shader_radial_reveal"]
 code = "shader_type canvas_item;
@@ -64,12 +66,12 @@ position = Vector2(0, 37.999996)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=576646646]
-position = Vector2(449.49982, 105.999954)
-scale = Vector2(0.9999998, 0.9999998)
+position = Vector2(449.4996, 106.99992)
+scale = Vector2(0.99999964, 0.99999964)
 shape = SubResource("RectangleShape2D_rf6br")
 
 [node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
-position = Vector2(697, 139)
+position = Vector2(703, 155)
 
 [node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
 position = Vector2(934, 592)
@@ -110,7 +112,7 @@ visible = false
 position = Vector2(532, 168)
 
 [node name="TrashCan" parent="." unique_id=788664407 instance=ExtResource("9_trash")]
-position = Vector2(827, 211)
+position = Vector2(827, 208)
 
 [node name="GameHUD" parent="." unique_id=707501026 instance=ExtResource("10_hud")]
 
@@ -131,7 +133,7 @@ volume_db = -13.887
 volume_db = -2.0
 
 [node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
-position = Vector2(65.99999, 194.99998)
+position = Vector2(65, 255)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="MesadaFrente" parent="." unique_id=2137042834 instance=ExtResource("8_k2i6c")]
@@ -149,10 +151,16 @@ position = Vector2(773, 471)
 [node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
 position = Vector2(194, 402)
 
+[node name="Plant" type="Sprite2D" parent="." unique_id=92343114]
+position = Vector2(852, 419.00003)
+scale = Vector2(0.082840234, 0.08284024)
+texture = ExtResource("15_x08y8")
+
 [node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=115628731]
 layer = 100
 
 [node name="Reveal" type="ColorRect" parent="TransitionLayer" unique_id=115628732]
+visible = false
 material = SubResource("ShaderMaterial_radial_reveal")
 anchors_preset = 15
 anchor_right = 1.0
@@ -175,3 +183,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Pc" type="Sprite2D" parent="." unique_id=214910725]
+position = Vector2(73.37501, 392.37503)
+scale = Vector2(0.13549805, 0.13549805)
+texture = ExtResource("16_cj10r")

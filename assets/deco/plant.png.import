@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhr2op18t37oi"
-path="res://.godot/imported/cashRegister.png-5c1d23368cf63b707c611708d77601db.ctex"
+uid="uid://1vabjfo5ot85"
+path="res://.godot/imported/plant.png-7901c70742742e449c25e8dabf68646f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cashRegister.png"
-dest_files=["res://.godot/imported/cashRegister.png-5c1d23368cf63b707c611708d77601db.ctex"]
+source_file="res://assets/deco/plant.png"
+dest_files=["res://.godot/imported/plant.png-7901c70742742e449c25e8dabf68646f.ctex"]
 
 [params]
 
