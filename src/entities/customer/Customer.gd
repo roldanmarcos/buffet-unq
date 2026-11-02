@@ -126,7 +126,7 @@ func _update_bubble_orders() -> void:
 	if orders.size() <= 1:
 		bubble_icon.position = Vector2(0, -113)
 		bubble_icon.rotation_degrees = 90.0 if orders[0] == "pancho" else 0.0
-		Items.apply_icon(bubble_icon, orders[0], Items.BUBBLE_SIZE * (1.25 if orders[0] == "pancho" else 1.0))
+		Items.apply_icon(bubble_icon, orders[0], _bubble_icon_size(orders[0], false))
 		_set_check(bubble_icon, delivered_orders[0], 0)
 		return
 	var positions := [Vector2(-24, -113), Vector2(24, -113)]
@@ -142,8 +142,20 @@ func _update_bubble_orders() -> void:
 				$Bubble.add_child(icon)
 		icon.position = positions[i]
 		icon.rotation_degrees = 90.0 if orders[i] == "pancho" else 0.0
-		Items.apply_icon(icon, orders[i], Items.BUBBLE_SIZE * (0.85 if orders[i] == "pancho" else 1.0))
+		Items.apply_icon(icon, orders[i], _bubble_icon_size(orders[i], true))
 		_set_check(icon, delivered_orders[i], i)
+
+
+func _bubble_icon_size(item: String, multiple_orders: bool) -> float:
+	if item == "pancho":
+		return Items.BUBBLE_SIZE * (0.85 if multiple_orders else 1.25)
+	if multiple_orders:
+		return Items.BUBBLE_SIZE
+	if item == "gaseosa":
+		return Items.BUBBLE_SIZE * 1.1
+	if item == "cafe":
+		return Items.BUBBLE_SIZE * 0.9
+	return Items.BUBBLE_SIZE
 
 
 func _set_check(icon: Sprite2D, visible_check: bool, index: int) -> void:
