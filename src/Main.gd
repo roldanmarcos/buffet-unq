@@ -21,6 +21,7 @@ var time_up := false
 var money := 0
 var lost_customers := 0
 var health_units := 6
+var next_customer_variant := 0
 var active_customers := 0
 var pending_money := 0
 
@@ -94,6 +95,8 @@ func _spawn_customer(slot: Marker2D) -> void:
 		return
 	active_customers += 1
 	var c: Customer = customer_scene.instantiate()
+	c.character_variant = next_customer_variant
+	next_customer_variant = (next_customer_variant + 1) % 2
 	c.orders = Items.random_orders(_available_orders())
 	c.order = c.orders[0]
 	c.delivered_orders.resize(c.orders.size())

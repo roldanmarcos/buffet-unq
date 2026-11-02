@@ -11,6 +11,7 @@ const BLINK_BELOW := 0.3
 @export var order: String = ""
 var orders: Array[String] = []
 var delivered_orders: Array[bool] = []
+var character_variant := 0
 @export var max_patience: float = 15.0
 
 enum State { ARRIVING, WAITING, LEAVING }
@@ -28,6 +29,11 @@ var exit_path: Array[Vector2] = []
 @onready var bar: ProgressBar = $PatienceBar
 @onready var bubble: Node2D = $Bubble
 @onready var bubble_icon: Sprite2D = $Bubble/Icon
+@onready var character_sprite_1: AnimatedSprite2D = $AnimatedSprite2D
+@onready var character_sprite_2: AnimatedSprite2D = $AnimatedSprite2D2
+var character_sprite: AnimatedSprite2D
+
+var facing := "down"
 
 signal departed(customer: Customer)
 
@@ -40,6 +46,10 @@ func setup(entrance: Vector2, slot: Vector2) -> void:
 
 
 func _ready() -> void:
+	character_sprite = character_sprite_1 if character_variant == 0 else character_sprite_2
+	character_sprite_1.visible = character_variant == 0
+	character_sprite_2.visible = character_variant == 1
+	character_sprite.play("idle_down")
 	patience = max_patience
 	
 	bar.show_percentage = false
@@ -144,11 +154,26 @@ func _set_check(icon: Sprite2D, visible_check: bool, index: int) -> void:
 
 func _follow_path(delta: float) -> bool:
 	if path.is_empty():
+		_play_direction_animation(false, Vector2.ZERO)
 		return true
+	_play_direction_animation(true, path[0] - global_position)
 	global_position = global_position.move_toward(path[0], WALK_SPEED * delta)
 	if global_position.is_equal_approx(path[0]):
 		path.pop_front()
+		if path.is_empty():
+			_play_direction_animation(false, Vector2.ZERO)
 	return path.is_empty()
+
+
+func _play_direction_animation(walking: bool, direction: Vector2) -> void:
+	if walking and direction != Vector2.ZERO:
+		if absf(direction.x) > absf(direction.y):
+			facing = "right" if direction.x > 0.0 else "left"
+		else:
+			facing = "down" if direction.y > 0.0 else "up"
+	var animation := ("walk_" if walking else "idle_") + facing
+	if character_sprite.animation != animation:
+		character_sprite.play(animation)
 
 
 func _start_leaving(angry: bool) -> void:

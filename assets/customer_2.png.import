@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpn3aa8sn31mk"
-path="res://.godot/imported/soda_pepsi.png-d75a8a730e08536abf45d85e2fb1ad98.ctex"
+uid="uid://e64wnbhll7gr"
+path="res://.godot/imported/customer_2.png-6d87e4188c3b192e96c385773b9f89f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/soda_pepsi.png"
-dest_files=["res://.godot/imported/soda_pepsi.png-d75a8a730e08536abf45d85e2fb1ad98.ctex"]
+source_file="res://assets/customer_2.png"
+dest_files=["res://.godot/imported/customer_2.png-6d87e4188c3b192e96c385773b9f89f6.ctex"]
 
 [params]
 

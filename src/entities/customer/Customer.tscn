@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://ivuvvgmfoewj"]
 
 [ext_resource type="Script" uid="uid://c1orqbe2ge3eu" path="res://src/entities/customer/Customer.gd" id="1_ow63a"]
-[ext_resource type="Texture2D" uid="uid://eq5oflvxs5dt" path="res://assets/customer.png" id="3_cnvdg"]
 [ext_resource type="Texture2D" uid="uid://nb83n4xvib1q" path="res://assets/cloud.png" id="3_exle7"]
 [ext_resource type="Texture2D" uid="uid://bfr88nd6rnap7" path="res://assets/gaseosa.png" id="4_8agcf"]
 [ext_resource type="Texture2D" uid="uid://cfisj3lbqh1sw" path="res://assets/check.png" id="5_check"]
+[ext_resource type="SpriteFrames" path="res://src/entities/customer/customer_1_frames.tres" id="6_customer1"]
+[ext_resource type="SpriteFrames" path="res://src/entities/customer/customer_2_frames.tres" id="7_customer2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exle7"]
 size = Vector2(65, 131)
@@ -15,10 +16,18 @@ size = Vector2(65, 281)
 [node name="Costumer" type="CharacterBody2D" unique_id=2033297472]
 script = ExtResource("1_ow63a")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=332190992]
-position = Vector2(0.5000019, -1.5)
-scale = Vector2(0.5078125, 1.0234375)
-texture = ExtResource("3_cnvdg")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=332190992]
+position = Vector2(0.5, -1.5)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("6_customer1")
+animation = &"idle_down"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0.5, -1.5)
+scale = Vector2(0.8, 0.8)
+sprite_frames = ExtResource("7_customer2")
+animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=549465207]
 position = Vector2(0.5, -1.5)
