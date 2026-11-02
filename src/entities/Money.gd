@@ -7,6 +7,7 @@ var player: Player = null
 
 
 func _ready() -> void:
+	Items.apply_icon($Sprite2D, "plata", Items.HAND_SIZE)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 

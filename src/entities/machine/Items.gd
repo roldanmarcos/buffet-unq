@@ -1,7 +1,7 @@
 class_name Items
 
 const ICON_PATHS := {
-	"gaseosa": "res://assets/soda_pepsi.png",
+	"gaseosa": "res://assets/gaseosa.png",
 	"cafe": "res://assets/coffee.png",
 	"pancho": "res://assets/hotDog.png",
 	"pan": "res://assets/bread.png",

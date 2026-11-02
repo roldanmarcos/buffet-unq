@@ -20,6 +20,7 @@ var level_over := false
 var time_up := false 
 var money := 0
 var lost_customers := 0
+var health_units := 6
 var active_customers := 0
 var pending_money := 0
 
@@ -65,6 +66,7 @@ func _ready() -> void:
 	reveal_tween.tween_method(_set_reveal, 0.0, 1.0, 1.7).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	reveal_tween.tween_callback(_finish_intro)
 	$CashRegister.cash_deposited.connect(_on_cash_deposited)
+	$TrashCan.item_discarded.connect(_on_item_discarded)
 	game_hud.main_menu_requested.connect(_on_main_menu_requested)
 	game_hud.restart_requested.connect(_on_restart_requested)
 	game_hud.next_level_requested.connect(_on_next_level_requested)
@@ -147,13 +149,20 @@ func _on_customer_served(customer: Customer) -> void:
 func _on_customer_left(_customer: Customer) -> void:
 	active_customers -= 1
 	lost_customers += 1
+	health_units = maxi(0, health_units - 2)
 	client_lost_sound.play()
 	_show_lost_customer_flash()
-	game_hud.set_lives(3 - lost_customers)
-	if lost_customers >= 3:
+	game_hud.set_health(health_units)
+	if health_units <= 0:
 		_end_level(false)
 	else:
 		_check_level_complete()
+
+func _on_item_discarded() -> void:
+	health_units = maxi(0, health_units - 1)
+	game_hud.set_health(health_units)
+	if health_units <= 0:
+		_end_level(false)
 
 func _show_lost_customer_flash() -> void:
 	if lost_customer_flash_tween and lost_customer_flash_tween.is_running():

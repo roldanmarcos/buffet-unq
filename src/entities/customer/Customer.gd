@@ -132,7 +132,7 @@ func _update_bubble_orders() -> void:
 				$Bubble.add_child(icon)
 		icon.position = positions[i]
 		icon.rotation_degrees = 90.0 if orders[i] == "pancho" else 0.0
-		Items.apply_icon(icon, orders[i], Items.BUBBLE_SIZE * (0.85 if orders[i] == "pancho" else 0.75))
+		Items.apply_icon(icon, orders[i], Items.BUBBLE_SIZE * (0.85 if orders[i] == "pancho" else 1.0))
 		_set_check(icon, delivered_orders[i], i)
 
 

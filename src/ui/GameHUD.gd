@@ -14,6 +14,7 @@ signal next_level_requested
 @onready var restart_button: TextureButton = $UI/ResultMenu/CenterContainer/ResultOptions/RestartButton
 @onready var next_level_button: TextureButton = $UI/ResultMenu/CenterContainer/ResultOptions/NextLevelButton
 const HEART_FULL := preload("res://assets/ui/corazon_lleno.png")
+const HEART_HALF := preload("res://assets/ui/corazon_mitad.png")
 const HEART_EMPTY := preload("res://assets/ui/corazon_vacio.png")
 const WIN_SOUND := preload("res://assets/sound/win.mp3")
 const LOST_SOUND := preload("res://assets/sound/lost.mp3")
@@ -25,9 +26,14 @@ func set_time(seconds_left: float) -> void:
 	timer_label.text = "%d:%02d" % [floori(s / 60.0), s % 60]
 	timer_label.modulate = Color.RED if s <= 10 else Color.WHITE
 
-func set_lives(lives_left: int) -> void:
+func set_health(half_hearts_left: int) -> void:
+	var remaining := clampi(half_hearts_left, 0, hearts.size() * 2)
 	for i in hearts.size():
-		hearts[i].texture = HEART_FULL if i < lives_left else HEART_EMPTY
+		var heart_health := clampi(remaining - i * 2, 0, 2)
+		match heart_health:
+			2: hearts[i].texture = HEART_FULL
+			1: hearts[i].texture = HEART_HALF
+			_: hearts[i].texture = HEART_EMPTY
 
 func _ready() -> void:
 	$UI/PauseButton.pressed.connect(_on_pause_button_pressed)
@@ -37,7 +43,7 @@ func _ready() -> void:
 	next_level_button.pressed.connect(func(): next_level_requested.emit())
 	$UI/ResultMenu/CenterContainer/ResultOptions/MainMenuButton.pressed.connect(_on_main_menu_pressed)
 	set_money(0)
-	set_lives(3)
+	set_health(6)
 
 
 func set_money(amount: int) -> void:
@@ -72,7 +78,7 @@ func show_level_result(won: bool, score: int, level_number: int, has_next_level:
 	pause_menu.hide()
 	level_label.hide()
 	if not won:
-		result_title.text = "Perdiste: se fueron 3 clientes"
+		result_title.text = "¡Te quedaste sin vidas!"
 	elif has_next_level:
 		result_title.text = "¡Nivel %d completado!" % level_number
 	else:
