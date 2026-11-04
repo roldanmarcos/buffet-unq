@@ -18,7 +18,11 @@ const HEART_HALF := preload("res://assets/ui/corazon_mitad.png")
 const HEART_EMPTY := preload("res://assets/ui/corazon_vacio.png")
 const WIN_SOUND := preload("res://assets/sound/win.mp3")
 const LOST_SOUND := preload("res://assets/sound/lost.mp3")
+const HOVER_SOUND := preload("res://assets/sound/hover.mp3")
+const CLICK_SOUND := preload("res://assets/sound/click.mp3")
 @onready var result_sound: AudioStreamPlayer = $ResultSound
+@onready var hover_sound: AudioStreamPlayer = $HoverSound
+@onready var click_sound: AudioStreamPlayer = $ClickSound
 @onready var hearts := [$UI/LivesPanel/Heart1, $UI/LivesPanel/Heart2, $UI/LivesPanel/Heart3]
 
 func set_time(seconds_left: float) -> void:
@@ -36,6 +40,16 @@ func set_health(half_hearts_left: int) -> void:
 			_: hearts[i].texture = HEART_EMPTY
 
 func _ready() -> void:
+	hover_sound.stream = HOVER_SOUND
+	hover_sound.process_mode = Node.PROCESS_MODE_ALWAYS
+	hover_sound.volume_db = -8.0
+	click_sound.stream = CLICK_SOUND
+	click_sound.process_mode = Node.PROCESS_MODE_ALWAYS
+	click_sound.volume_db = -8.0
+	for node in find_children("*", "BaseButton", true, false):
+		var button := node as BaseButton
+		button.mouse_entered.connect(_play_hover_sound)
+		button.pressed.connect(_play_click_sound)
 	$UI/PauseButton.pressed.connect(_on_pause_button_pressed)
 	$UI/PauseMenu/CenterContainer/PauseOptions/ResumeButton.pressed.connect(_on_resume_pressed)
 	$UI/PauseMenu/CenterContainer/PauseOptions/MainMenuButton.pressed.connect(_on_main_menu_pressed)
@@ -44,6 +58,14 @@ func _ready() -> void:
 	$UI/ResultMenu/CenterContainer/ResultOptions/MainMenuButton.pressed.connect(_on_main_menu_pressed)
 	set_money(0)
 	set_health(6)
+
+
+func _play_hover_sound() -> void:
+	hover_sound.play()
+
+
+func _play_click_sound() -> void:
+	click_sound.play()
 
 
 func set_money(amount: int) -> void:

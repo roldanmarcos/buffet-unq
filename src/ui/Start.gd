@@ -3,6 +3,8 @@ extends Control
 const GAME_SCENE := "res://src/Main.tscn"
 const START_SOUND := preload("res://assets/sound/start.mp3")
 const MENU_MUSIC := preload("res://assets/sound/music.ogg")
+const HOVER_SOUND := preload("res://assets/sound/hover.mp3")
+const CLICK_SOUND := preload("res://assets/sound/click.mp3")
 
 @onready var intro_layer: CenterContainer = $IntroLayer
 @onready var menu_layer: CenterContainer = $MenuLayer
@@ -19,9 +21,19 @@ const MENU_MUSIC := preload("res://assets/sound/music.ogg")
 ]
 @onready var intro_timer: Timer = $IntroTimer
 @onready var tutorial_sprite: Sprite2D = $TutorialLayer/TutorialSprite
+@onready var hover_sound: AudioStreamPlayer = $HoverSound
+@onready var click_sound: AudioStreamPlayer = $ClickSound
 
 
 func _ready() -> void:
+	hover_sound.stream = HOVER_SOUND
+	hover_sound.volume_db = -8.0
+	click_sound.stream = CLICK_SOUND
+	click_sound.volume_db = -8.0
+	for node in find_children("*", "BaseButton", true, false):
+		var button := node as BaseButton
+		button.mouse_entered.connect(_play_hover_sound)
+		button.pressed.connect(_play_click_sound)
 	$MenuLayer/Menu/StartButton.pressed.connect(_on_start_pressed)
 	$MenuLayer/Menu/TutorialButton.pressed.connect(_on_tutorial_pressed)
 	$TutorialLayer/BackButton.pressed.connect(_on_back_pressed)
@@ -48,6 +60,14 @@ func _ready() -> void:
 	$IntroSound.stream = START_SOUND
 	$IntroSound.play()
 	intro_timer.start()
+
+
+func _play_hover_sound() -> void:
+	hover_sound.play()
+
+
+func _play_click_sound() -> void:
+	click_sound.play()
 
 
 func _on_intro_timer_timeout() -> void:
