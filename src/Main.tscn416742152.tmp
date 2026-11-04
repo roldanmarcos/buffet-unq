@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://dg1p3d1gphkb4"]
+
+[ext_resource type="PackedScene" uid="uid://cdd0lph7gofww" path="res://src/entities/player/Player.tscn" id="1_4gxt3"]
+[ext_resource type="Script" uid="uid://j38kfx4hoaf7" path="res://src/Main.gd" id="1_vjwby"]
+[ext_resource type="PackedScene" uid="uid://c5ftgosx7v8xq" path="res://src/environment/MesadaFondo.tscn" id="2_hk4rc"]
+[ext_resource type="Texture2D" uid="uid://crqxsyryyc1wh" path="res://assets/background.png" id="3_8ec3e"]
+[ext_resource type="PackedScene" uid="uid://h8k21cixa72m" path="res://src/entities/machine/Fridge.tscn" id="3_chrbn"]
+[ext_resource type="PackedScene" uid="uid://bfjxufr2j1o0" path="res://src/entities/Money.tscn" id="3_insap"]
+[ext_resource type="PackedScene" uid="uid://ivuvvgmfoewj" path="res://src/entities/customer/Customer.tscn" id="4_5qjmp"]
+[ext_resource type="PackedScene" uid="uid://bp58wog6ev06w" path="res://src/entities/machine/CoffeeMachine.tscn" id="7_38a0m"]
+[ext_resource type="PackedScene" uid="uid://d0i24t584hfqe" path="res://src/entities/machine/HotDogs.tscn" id="8_0ri8u"]
+[ext_resource type="PackedScene" uid="uid://dtp2bj4tldshs" path="res://src/entities/machine/BreadBasket.tscn" id="8_bread"]
+[ext_resource type="PackedScene" uid="uid://vxse62604jmo" path="res://src/entities/machine/CashRegister.tscn" id="8_fh42b"]
+[ext_resource type="PackedScene" uid="uid://cpo5dc1j6l7pq" path="res://src/environment/MesadaFrente.tscn" id="8_k2i6c"]
+[ext_resource type="PackedScene" uid="uid://cd4pyjm0ij4wm" path="res://src/entities/machine/TrashCan.tscn" id="9_trash"]
+[ext_resource type="PackedScene" uid="uid://co75ni8k6qdki" path="res://src/ui/GameHUD.tscn" id="10_hud"]
+[ext_resource type="Texture2D" uid="uid://1vabjfo5ot85" path="res://assets/deco/plant.png" id="15_x08y8"]
+[ext_resource type="Texture2D" uid="uid://dbrtebkfoic87" path="res://assets/deco/pc.png" id="16_cj10r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
+size = Vector2(901.00006, 214.00024)
+
+[sub_resource type="Shader" id="Shader_radial_reveal"]
+code = "shader_type canvas_item;
+
+uniform float reveal : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec2 pixel_position = (UV - vec2(0.5)) / SCREEN_PIXEL_SIZE;
+	float shortest_side = min(1.0 / SCREEN_PIXEL_SIZE.x, 1.0 / SCREEN_PIXEL_SIZE.y);
+	float distance_from_center = length(pixel_position) / shortest_side;
+	float visible_radius = reveal * 0.9;
+	float darkness = 1.0 - smoothstep(visible_radius - 0.04, visible_radius + 0.04, distance_from_center);
+	COLOR = vec4(0.0, 0.0, 0.0, 1.0 - darkness);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_radial_reveal"]
+shader = SubResource("Shader_radial_reveal")
+shader_parameter/reveal = 0.0
+
+[sub_resource type="Shader" id="Shader_red_vignette"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float distance_from_center = length((UV - vec2(0.5)) * 2.0);
+	float edge_strength = smoothstep(0.2, 1.0, distance_from_center);
+	float tint_opacity = mix(0.08, 0.72, edge_strength);
+	COLOR = vec4(vec3(0.34, 0.10, 0.10), tint_opacity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_red_vignette"]
+shader = SubResource("Shader_red_vignette")
+
+[node name="Main" type="Node" unique_id=1223696925]
+script = ExtResource("1_vjwby")
+customer_scene = ExtResource("4_5qjmp")
+money_scene = ExtResource("3_insap")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=163994369]
+position = Vector2(460.00003, 272.1797)
+scale = Vector2(0.5976563, 0.734024)
+texture = ExtResource("3_8ec3e")
+
+[node name="Wall" type="StaticBody2D" parent="." unique_id=1739874771]
+position = Vector2(0, 37.999996)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=576646646]
+position = Vector2(449.4996, 106.99992)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_rf6br")
+
+[node name="Fridge" parent="." unique_id=940246524 instance=ExtResource("3_chrbn")]
+position = Vector2(683, 155)
+
+[node name="Entrada" type="Marker2D" parent="." unique_id=2023304814]
+position = Vector2(934, 592)
+
+[node name="Lugar1" type="Marker2D" parent="." unique_id=416677559]
+position = Vector2(307, 538)
+
+[node name="MoneyPos" type="Marker2D" parent="Lugar1" unique_id=802177737]
+position = Vector2(1, -92)
+
+[node name="Lugar2" type="Marker2D" parent="." unique_id=1006403468]
+position = Vector2(523, 536)
+
+[node name="MoneyPos" type="Marker2D" parent="Lugar2" unique_id=892011439]
+position = Vector2(-3, -92)
+
+[node name="Lugar3" type="Marker2D" parent="." unique_id=458037581]
+position = Vector2(776, 536)
+
+[node name="MoneyPos" type="Marker2D" parent="Lugar3" unique_id=1496335617]
+position = Vector2(-3, -92)
+
+[node name="MesadaFondo" parent="." unique_id=1068390828 instance=ExtResource("2_hk4rc")]
+position = Vector2(237, 209)
+
+[node name="MesadaFondo2" parent="." unique_id=110983076 instance=ExtResource("2_hk4rc")]
+position = Vector2(495, 209)
+
+[node name="CoffeeMachine" parent="." unique_id=562397826 instance=ExtResource("7_38a0m")]
+position = Vector2(218, 148)
+prep_seconds = null
+
+[node name="HotDogs" parent="." unique_id=940914804 instance=ExtResource("8_0ri8u")]
+visible = false
+position = Vector2(388, 143)
+
+[node name="BreadBasket" parent="." unique_id=1765731571 instance=ExtResource("8_bread")]
+visible = false
+position = Vector2(532, 168)
+
+[node name="TrashCan" parent="." unique_id=788664407 instance=ExtResource("9_trash")]
+position = Vector2(807, 208)
+
+[node name="GameHUD" parent="." unique_id=707501026 instance=ExtResource("10_hud")]
+
+[node name="LevelTimer" type="Timer" parent="." unique_id=1797436448]
+
+[node name="DoorSound" type="AudioStreamPlayer" parent="." unique_id=1797436449]
+
+[node name="ClientLostSound" type="AudioStreamPlayer" parent="." unique_id=1797436450]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1797436451]
+process_mode = 3
+volume_db = -11.028
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1797436452]
+volume_db = -13.887
+
+[node name="TickSound" type="AudioStreamPlayer" parent="." unique_id=1797436453]
+volume_db = -2.0
+
+[node name="Player" parent="." unique_id=209728546 instance=ExtResource("1_4gxt3")]
+position = Vector2(65, 255)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="MesadaFrente" parent="." unique_id=2137042834 instance=ExtResource("8_k2i6c")]
+position = Vector2(267, 471)
+
+[node name="MesadaFrente4" parent="." unique_id=1943163537 instance=ExtResource("8_k2i6c")]
+position = Vector2(14, 471)
+
+[node name="MesadaFrente2" parent="." unique_id=1098256160 instance=ExtResource("8_k2i6c")]
+position = Vector2(520, 471)
+
+[node name="MesadaFrente3" parent="." unique_id=24184181 instance=ExtResource("8_k2i6c")]
+position = Vector2(773, 471)
+
+[node name="CashRegister" parent="." unique_id=250557037 instance=ExtResource("8_fh42b")]
+position = Vector2(194, 402)
+
+[node name="Plant" type="Sprite2D" parent="." unique_id=92343114]
+position = Vector2(852, 419.00003)
+scale = Vector2(0.082840234, 0.08284024)
+texture = ExtResource("15_x08y8")
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=115628731]
+layer = 100
+
+[node name="Reveal" type="ColorRect" parent="TransitionLayer" unique_id=115628732]
+visible = false
+material = SubResource("ShaderMaterial_radial_reveal")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LostCustomerFlashLayer" type="CanvasLayer" parent="." unique_id=1392650872]
+layer = 99
+
+[node name="Flash" type="ColorRect" parent="LostCustomerFlashLayer" unique_id=1392650873]
+visible = false
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_red_vignette")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Pc" type="Sprite2D" parent="." unique_id=214910725]
+position = Vector2(73.37501, 392.37503)
+scale = Vector2(0.13549805, 0.13549805)
+texture = ExtResource("16_cj10r")

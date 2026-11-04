@@ -1,0 +1,72 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bkkvft6n1mkrt"]
+
+[ext_resource type="Texture2D" uid="uid://b8q237yhatyl4" path="res://assets/coffe_machine.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="Atlas_idle"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1170, 512, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(67, 0, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(434, 0, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(800, 0, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1170, 0, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(67, 512, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_5"]
+atlas = ExtResource("1_sheet")
+region = Rect2(434, 512, 320, 512)
+
+[sub_resource type="AtlasTexture" id="Atlas_work_6"]
+atlas = ExtResource("1_sheet")
+region = Rect2(800, 512, 320, 512)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_idle")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_work_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_work_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_work_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_work_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_work_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_work_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_work_6")
+}],
+"loop": 1,
+"name": &"working",
+"speed": 6.0
+}]

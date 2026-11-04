@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bp58wog6ev06w"]
 
 [ext_resource type="Script" uid="uid://b2tj8ucy3ifcb" path="res://src/entities/machine/CoffeeMachine.gd" id="1_p5ome"]
-[ext_resource type="Texture2D" uid="uid://xk6ljthb4pg4" path="res://assets/coffeeMachine.png" id="2_xei2y"]
+[ext_resource type="SpriteFrames" uid="uid://bkkvft6n1mkrt" path="res://src/entities/machine/coffee_machine_frames.tres" id="2_frames"]
+[ext_resource type="AudioStream" uid="uid://dgwwymfosu27l" path="res://assets/sound/coffe_machine.mp3" id="3_nyame"]
 [ext_resource type="Texture2D" uid="uid://bifg5cccj3cff" path="res://assets/coffee.png" id="3_xei2y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t37fl"]
@@ -13,9 +14,12 @@ size = Vector2(61, 201)
 [node name="CoffeeMachine" type="StaticBody2D" unique_id=940246524]
 script = ExtResource("1_p5ome")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=915455090]
-scale = Vector2(0.09078657, 0.099529)
-texture = ExtResource("2_xei2y")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=915455090]
+position = Vector2(0, -27.079998)
+scale = Vector2(0.38312498, 0.38312498)
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=136802334]
 position = Vector2(-0.5, 0.5)
@@ -28,6 +32,10 @@ position = Vector2(-0.5, 55.5)
 shape = SubResource("RectangleShape2D_5qjmp")
 
 [node name="PrepTimer" type="Timer" parent="." unique_id=1231842902]
+
+[node name="MachineSound" type="AudioStreamPlayer" parent="." unique_id=1486503201]
+stream = ExtResource("3_nyame")
+volume_db = -7.761
 
 [node name="Cup" type="Sprite2D" parent="." unique_id=1433429031]
 position = Vector2(0, 21.333)
