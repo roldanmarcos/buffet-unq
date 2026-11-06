@@ -26,8 +26,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("interact") or player == null:
 		return
 	if not player.has_item() or player.held_item == "plata":
-		# Si ya tiene plata en la mano, la suma: así lleva todo junto a la caja.
-		# Se marca el input como usado para levantar un solo billete por vez.
 		player.hold("plata", player.held_value + value)
 		get_viewport().set_input_as_handled()
 		queue_free()

@@ -8,7 +8,6 @@ const CLICK_SOUND := preload("res://assets/sound/click.mp3")
 
 @onready var intro_layer: CenterContainer = $IntroLayer
 @onready var menu_layer: CenterContainer = $MenuLayer
-@onready var tutorial_layer: Control = $TutorialLayer
 @onready var level_layer: CenterContainer = $LevelLayer
 @onready var character_layer: CenterContainer = $CharacterLayer
 @onready var character_buttons := {
@@ -20,9 +19,10 @@ const CLICK_SOUND := preload("res://assets/sound/click.mp3")
 	$LevelLayer/Levels/Level2Button,
 ]
 @onready var intro_timer: Timer = $IntroTimer
-@onready var tutorial_sprite: Sprite2D = $TutorialLayer/TutorialSprite
 @onready var hover_sound: AudioStreamPlayer = $HoverSound
 @onready var click_sound: AudioStreamPlayer = $ClickSound
+
+var tutorial_pending := false
 
 
 func _ready() -> void:
@@ -36,7 +36,6 @@ func _ready() -> void:
 		button.pressed.connect(_play_click_sound)
 	$MenuLayer/Menu/StartButton.pressed.connect(_on_start_pressed)
 	$MenuLayer/Menu/TutorialButton.pressed.connect(_on_tutorial_pressed)
-	$TutorialLayer/BackButton.pressed.connect(_on_back_pressed)
 	$LevelLayer/Levels/BackButton.pressed.connect(_on_back_pressed)
 	$CharacterLayer/Characters/BackButton.pressed.connect(_on_back_pressed)
 	for character in character_buttons:
@@ -47,8 +46,6 @@ func _ready() -> void:
 	for i in level_buttons.size():
 		level_buttons[i].pressed.connect(_start_level.bind(i))
 	intro_timer.timeout.connect(_on_intro_timer_timeout)
-	get_viewport().size_changed.connect(_center_tutorial_sprite)
-	_center_tutorial_sprite()
 	$MenuMusic.stream = MENU_MUSIC
 	if get_tree().has_meta("returning_to_main_menu"):
 		get_tree().remove_meta("returning_to_main_menu")
@@ -77,12 +74,17 @@ func _on_intro_timer_timeout() -> void:
 
 
 func _on_start_pressed() -> void:
+	tutorial_pending = false
 	menu_layer.hide()
 	character_layer.show()
 
 
 func _on_character_chosen(character: String) -> void:
 	get_tree().set_meta(Player.CHARACTER_META, character)
+	if tutorial_pending:
+		Levels.start_tutorial(get_tree())
+		get_tree().change_scene_to_file(GAME_SCENE)
+		return
 	if SaveData.unlocked_level() == 0:
 		_start_level(0)
 		return
@@ -98,12 +100,13 @@ func _start_level(index: int) -> void:
 
 
 func _on_tutorial_pressed() -> void:
+	tutorial_pending = true
 	menu_layer.hide()
-	tutorial_layer.show()
+	character_layer.show()
 
 
 func _on_back_pressed() -> void:
-	tutorial_layer.hide()
+	tutorial_pending = false
 	level_layer.hide()
 	character_layer.hide()
 	menu_layer.show()
@@ -112,7 +115,3 @@ func _on_back_pressed() -> void:
 func _set_button_zoom(button: Control, zoom: float) -> void:
 	var tween := create_tween()
 	tween.tween_property(button, "scale", Vector2.ONE * zoom, 0.1)
-
-
-func _center_tutorial_sprite() -> void:
-	tutorial_sprite.position = get_viewport_rect().size / 5.0

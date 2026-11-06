@@ -10,12 +10,14 @@ const HURRY_SECONDS := 15.0
 const HURRY_MUSIC_PITCH := 1.1
 const TICK_SECONDS := 10
 const AMBIENCE_DB_PER_CUSTOMER := 2.5
+const TUTORIAL_PATIENCE := 9999.0
 
 @export var customer_scene: PackedScene
 @export var money_scene: PackedScene
 
 var level_index := 0
 var level: Dictionary
+var tutorial := false
 var level_over := false
 var time_up := false 
 var money := 0
@@ -36,6 +38,7 @@ var pending_money := 0
 @onready var music: AudioStreamPlayer = $Music
 @onready var ambience: AudioStreamPlayer = $Ambience
 @onready var tick_sound: AudioStreamPlayer = $TickSound
+@onready var tutorial_guide: TutorialGuide = $TutorialGuide
 @onready var ambience_base_db: float = ambience.volume_db
 
 var hurrying := false
@@ -46,7 +49,8 @@ var lost_customer_flash_tween: Tween
 
 func _ready() -> void:
 	level_index = Levels.current(get_tree())
-	level = Levels.data(level_index)
+	tutorial = Levels.is_tutorial(get_tree())
+	level = Levels.TUTORIAL if tutorial else Levels.data(level_index)
 	if not level.orderable.has("pancho"):
 		$HotDogs.queue_free()
 		$BreadBasket.queue_free()
@@ -78,6 +82,24 @@ func _finish_intro() -> void:
 	level_timer.one_shot = true
 	level_timer.wait_time = level.seconds
 	level_timer.timeout.connect(_on_level_timer_timeout)
+	if tutorial:
+		game_hud.set_timer_visible(false)
+		game_hud.show_intro_text("Tutorial")
+		tutorial_guide.finished.connect(_on_main_menu_requested)
+		tutorial_guide.start(TutorialSteps.basics(self))
+	elif level.orderable.has("pancho") and not SaveData.hot_dogs_tutorial_seen():
+		tutorial_guide.finished.connect(_on_hot_dogs_tutorial_finished)
+		tutorial_guide.start(TutorialSteps.hot_dogs(self))
+	else:
+		_start_level_play()
+
+func _on_hot_dogs_tutorial_finished() -> void:
+	SaveData.mark_hot_dogs_tutorial_seen()
+	$Player.drop_item()
+	$HotDogs.clear_slots()
+	_start_level_play()
+
+func _start_level_play() -> void:
 	level_timer.start()
 	game_hud.show_level_intro(level_index + 1)
 	_schedule_spawn($Lugar1, 0.0)
@@ -93,18 +115,26 @@ func _schedule_spawn(slot: Marker2D, delay: float) -> void:
 func _spawn_customer(slot: Marker2D) -> void:
 	if level_over or time_up:
 		return
+	var orders := Items.random_orders(_available_orders())
+	var patience := 0.0
+	for item in orders:
+		patience = maxf(patience, Items.patience(item))
+	_create_customer(slot, orders, patience * level.patience_multiplier)
+
+func spawn_tutorial_customer(slot: Marker2D, item: String) -> Customer:
+	var orders: Array[String] = [item]
+	return _create_customer(slot, orders, TUTORIAL_PATIENCE)
+
+func _create_customer(slot: Marker2D, orders: Array[String], max_patience: float) -> Customer:
 	active_customers += 1
 	var c: Customer = customer_scene.instantiate()
 	c.character_variant = next_customer_variant
 	next_customer_variant = (next_customer_variant + 1) % 2
-	c.orders = Items.random_orders(_available_orders())
+	c.orders = orders
 	c.order = c.orders[0]
 	c.delivered_orders.resize(c.orders.size())
 	c.delivered_orders.fill(false)
-	var patience := 0.0
-	for item in c.orders:
-		patience = maxf(patience, Items.patience(item))
-	c.max_patience = patience * level.patience_multiplier
+	c.max_patience = max_patience
 	c.set_meta("money_pos", slot.get_node("MoneyPos").global_position)
 	add_child(c)
 	door_sound.play()
@@ -112,6 +142,7 @@ func _spawn_customer(slot: Marker2D) -> void:
 	c.served.connect(_on_customer_served)
 	c.left_unserved.connect(_on_customer_left)
 	c.departed.connect(_on_customer_departed.bind(slot))
+	return c
 
 func _available_orders() -> Array:
 	var options: Array = level.orderable.filter(
@@ -136,6 +167,8 @@ func _waiting_orders(item: String) -> int:
 	return count
 
 func _on_customer_departed(_customer: Customer, slot: Marker2D) -> void:
+	if tutorial:
+		return
 	_schedule_spawn(slot, randf_range(level.spawn_delay_min, level.spawn_delay_max))
 	
 func _on_customer_served(customer: Customer) -> void:
@@ -162,7 +195,7 @@ func _on_customer_left(_customer: Customer) -> void:
 		_check_level_complete()
 
 func _on_item_discarded() -> void:
-	health_units = maxi(0, health_units - 1)
+	health_units = maxi(1 if tutorial else 0, health_units - 1)
 	game_hud.set_health(health_units)
 	if health_units <= 0:
 		_end_level(false)
@@ -201,7 +234,7 @@ func _on_next_level_requested() -> void:
 
 func _process(delta: float) -> void:
 	if not level_over:
-		game_hud.set_time(level_timer.time_left)
+		game_hud.set_time(level.seconds if level_timer.is_stopped() and not time_up else level_timer.time_left)
 		_update_tension(level_timer.time_left)
 	var target_db := ambience_base_db + AMBIENCE_DB_PER_CUSTOMER * _waiting_customers()
 	ambience.volume_db = lerpf(ambience.volume_db, target_db, delta * 2.0)

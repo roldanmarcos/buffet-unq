@@ -1,6 +1,16 @@
 class_name Levels
 
 const CURRENT_LEVEL_META := "current_level"
+const TUTORIAL_META := "tutorial"
+
+const TUTORIAL := {
+	"tutorial": true,
+	"orderable": ["gaseosa", "cafe"],
+	"seconds": 90.0,
+	"spawn_delay_min": 2.0,
+	"spawn_delay_max": 4.0,
+	"patience_multiplier": 1.0,
+}
 
 const LEVELS := [
 	{
@@ -24,6 +34,13 @@ static func current(tree: SceneTree) -> int:
 
 static func set_current(tree: SceneTree, index: int) -> void:
 	tree.set_meta(CURRENT_LEVEL_META, clampi(index, 0, LEVELS.size() - 1))
+	tree.set_meta(TUTORIAL_META, false)
+
+static func start_tutorial(tree: SceneTree) -> void:
+	tree.set_meta(TUTORIAL_META, true)
+
+static func is_tutorial(tree: SceneTree) -> bool:
+	return tree.get_meta(TUTORIAL_META, false)
 
 static func data(index: int) -> Dictionary:
 	return LEVELS[index]

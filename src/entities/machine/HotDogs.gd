@@ -36,6 +36,12 @@ func interact(p: Player) -> void:
 		_set_slot_state(ready_slot, SlotState.EMPTY)
 
 
+func clear_slots() -> void:
+	for i in slots.size():
+		slots[i].get_node("PrepTimer").stop()
+		_set_slot_state(i, SlotState.EMPTY)
+
+
 func _on_prep_timer_timeout(slot_index: int) -> void:
 	_set_slot_state(slot_index, SlotState.READY)
 

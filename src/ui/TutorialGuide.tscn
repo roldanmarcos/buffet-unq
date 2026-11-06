@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bnopi1j4dpv2"]
+
+[ext_resource type="Script" uid="uid://bkv5sdej7t3qs" path="res://src/ui/TutorialGuide.gd" id="1_guide"]
+
+[sub_resource type="Shader" id="Shader_spotlight"]
+code = "shader_type canvas_item;
+
+uniform vec2 center = vec2(0.0);
+uniform vec2 rect_size = vec2(900.0, 648.0);
+uniform float radius = 85.0;
+uniform float strength = 0.0;
+
+void fragment() {
+	float d = distance(UV * rect_size, center);
+	float outside = smoothstep(radius, radius + 22.0, d);
+	COLOR = vec4(0.0, 0.0, 0.0, outside * strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spotlight"]
+shader = SubResource("Shader_spotlight")
+shader_parameter/center = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(900, 648)
+shader_parameter/radius = 85.0
+shader_parameter/strength = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_message"]
+bg_color = Color(1, 0.956863, 0.862745, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.290196, 0.164706, 0.0862745, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="TutorialGuide" type="CanvasLayer"]
+process_mode = 3
+layer = 50
+script = ExtResource("1_guide")
+
+[node name="Dim" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_spotlight")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Arrow" type="Node2D" parent="."]
+visible = false
+
+[node name="Outline" type="Polygon2D" parent="Arrow"]
+color = Color(0.290196, 0.164706, 0.0862745, 1)
+polygon = PackedVector2Array(-19, -27, 19, -27, 0, 5)
+
+[node name="Fill" type="Polygon2D" parent="Arrow"]
+color = Color(1, 0.956863, 0.862745, 1)
+polygon = PackedVector2Array(-13, -23, 13, -23, 0, -2)
+
+[node name="MessagePanel" type="PanelContainer" parent="."]
+offset_left = 250.0
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_message")
+
+[node name="Margin" type="MarginContainer" parent="MessagePanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="MessagePanel/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Message" type="Label" parent="MessagePanel/Margin/VBox"]
+custom_minimum_size = Vector2(366, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16, 0.09, 0.05, 1)
+theme_override_font_sizes/font_size = 17
+text = "Instrucción"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="MessagePanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.32, 0.18, 1)
+theme_override_font_sizes/font_size = 13
+text = "Espacio para seguir"
+horizontal_alignment = 1

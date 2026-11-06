@@ -68,6 +68,10 @@ func _play_click_sound() -> void:
 	click_sound.play()
 
 
+func set_timer_visible(timer_visible: bool) -> void:
+	$UI/TimerPanel.visible = timer_visible
+
+
 func set_money(amount: int) -> void:
 	money_label.text = "%d" % amount
 
@@ -87,7 +91,11 @@ func _on_main_menu_pressed() -> void:
 
 
 func show_level_intro(level_number: int) -> void:
-	level_label.text = "Nivel %d" % level_number
+	show_intro_text("Nivel %d" % level_number)
+
+
+func show_intro_text(text: String) -> void:
+	level_label.text = text
 	level_label.modulate.a = 1.0
 	level_label.show()
 	var tween := create_tween()

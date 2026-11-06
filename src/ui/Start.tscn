@@ -286,23 +286,3 @@ offset_bottom = 85.0
 texture_normal = ExtResource("19_atras")
 texture_pressed = ExtResource("20_atrasp")
 texture_hover = ExtResource("21_atrash")
-
-[node name="TutorialLayer" type="Control" parent="." unique_id=667132243]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BackButton" type="Button" parent="TutorialLayer" unique_id=241328247]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 84.0
-offset_bottom = 84.0
-theme_override_font_sizes/font_size = 32
-text = "←"
-
-[node name="TutorialSprite" type="Sprite2D" parent="TutorialLayer" unique_id=823939380]
