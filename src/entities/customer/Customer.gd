@@ -7,6 +7,7 @@ signal left_unserved(customer: Customer)
 
 const WALK_SPEED := 200.0
 const BLINK_BELOW := 0.3
+const PARTIAL_DELIVERY_BONUS := 5.0
 
 @export var order: String = ""
 var orders: Array[String] = []
@@ -111,6 +112,27 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _all_orders_delivered():
 		served.emit(self)
 		_start_leaving(false)
+	else:
+		_add_patience(PARTIAL_DELIVERY_BONUS)
+
+
+func _add_patience(seconds: float) -> void:
+	patience = minf(max_patience, patience + seconds)
+	blink_time = 0.0
+	_update_bar()
+	var label := Label.new()
+	label.text = "+%ds" % int(seconds)
+	label.add_theme_font_size_override("font_size", 18)
+	label.add_theme_color_override("font_color", Color(0.3, 1.0, 0.3))
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 6)
+	label.position = bar.position + Vector2(bar.size.x + 4.0, -8.0)
+	add_child(label)
+	var tween := create_tween()
+	tween.set_parallel()
+	tween.tween_property(label, "position:y", label.position.y - 28.0, 0.9)
+	tween.tween_property(label, "modulate:a", 0.0, 0.9).set_delay(0.3)
+	tween.chain().tween_callback(label.queue_free)
 
 
 func _all_orders_delivered() -> bool:

@@ -18,38 +18,38 @@ static func basics(main: Node) -> Array:
 			"done": func(): return player.global_position.distance_to(start_pos) > 120.0,
 		},
 		{
-			"text": "Llegó un cliente. Andá a la heladera y apretá E para agarrar una gaseosa.",
+			"text": "Con la tecla E agarrás, dejás y entregás cosas. Llegó un cliente: andá a la heladera y agarrá una gaseosa.",
 			"on_start": func(): spawned.soda = main.spawn_tutorial_customer(main.get_node("Lugar3"), "gaseosa"),
 			"target": func(): return fridge.global_position,
 			"radius": 75.0,
 			"done": func(): return player.held_item == "gaseosa",
 		},
 		{
-			"text": "Llevale la gaseosa al cliente y apretá E para entregársela.",
+			"text": "Llevale la gaseosa al cliente.",
 			"target": func(): return _customer_position(spawned.soda),
 			"done": func(): return _was_served(spawned.soda),
 		},
 		{
-			"text": "¡Te pagó! Agarrá la plata del mostrador con E.",
+			"text": "¡Te pagó! Agarrá la plata del mostrador.",
 			"target": func(): return _money_position(main),
 			"radius": 60.0,
 			"done": func(): return player.held_item == "plata",
 		},
 		{
-			"text": "Llevá la plata a la caja y apretá E.",
+			"text": "Llevá la plata a la caja.",
 			"target": func(): return register.global_position,
 			"radius": 65.0,
 			"done": func(): return main.money > 0,
 		},
 		{
-			"text": "Este cliente quiere café. Apretá E en la cafetera para que empiece a prepararlo.",
+			"text": "Este cliente quiere café. Usá la cafetera para que empiece a prepararlo.",
 			"on_start": func(): spawned.coffee = main.spawn_tutorial_customer(main.get_node("Lugar1"), "cafe"),
 			"target": func(): return coffee.global_position,
 			"radius": 70.0,
 			"done": func(): return coffee.state != coffee.State.IDLE,
 		},
 		{
-			"text": "El café tarda unos segundos. Cuando esté listo, agarralo con E.",
+			"text": "El café tarda unos segundos. Cuando esté listo, agarralo.",
 			"target": func(): return coffee.global_position,
 			"radius": 70.0,
 			"done": func(): return player.held_item == "cafe",
@@ -82,7 +82,7 @@ static func basics(main: Node) -> Array:
 			"radius": 80.0,
 		},
 		{
-			"text": "Ojo: algunos clientes piden dos cosas, y te pagan cuando les diste todo.",
+			"text": "Ojo: algunos clientes piden dos cosas y te pagan cuando les diste todo. Cuando les das la primera, recuperan un poco de paciencia.",
 		},
 		{
 			"text": "En el juego tenés 90 segundos para atender a todos. ¡Listo, ya sabés atender el buffet!",
@@ -97,19 +97,19 @@ static func hot_dogs(main: Node) -> Array:
 
 	return [
 		{
-			"text": "¡Nuevo en este nivel: los panchos! Agarrá un pan de la panera con E.",
+			"text": "¡Nuevo en este nivel: los panchos! Agarrá un pan de la panera.",
 			"target": func(): return basket.global_position,
 			"radius": 60.0,
 			"done": func(): return player.held_item == "pan",
 		},
 		{
-			"text": "Dejá el pan en la máquina de panchos con E.",
+			"text": "Dejá el pan en la máquina de panchos.",
 			"target": func(): return hot_dogs_machine.global_position,
 			"radius": 70.0,
 			"done": func(): return hot_dogs_machine.slot_states.any(func(s): return s != hot_dogs_machine.SlotState.EMPTY),
 		},
 		{
-			"text": "La máquina tarda unos segundos y puede hacer dos panchos a la vez. Cuando esté listo, agarralo con E.",
+			"text": "La máquina tarda unos segundos y puede hacer dos panchos a la vez. Cuando esté listo, agarralo.",
 			"target": func(): return hot_dogs_machine.global_position,
 			"radius": 70.0,
 			"done": func(): return player.held_item == "pancho",
