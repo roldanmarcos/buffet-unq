@@ -53,6 +53,7 @@ func _ready() -> void:
 	$UI/PauseButton.pressed.connect(_on_pause_button_pressed)
 	$UI/PauseMenu/CenterContainer/PauseOptions/ResumeButton.pressed.connect(_on_resume_pressed)
 	$UI/PauseMenu/CenterContainer/PauseOptions/MainMenuButton.pressed.connect(_on_main_menu_pressed)
+	$UI/PauseMenu/CenterContainer/PauseOptions/RestartButton.pressed.connect(func(): restart_requested.emit())
 	restart_button.pressed.connect(func(): restart_requested.emit())
 	next_level_button.pressed.connect(func(): next_level_requested.emit())
 	$UI/ResultMenu/CenterContainer/ResultOptions/MainMenuButton.pressed.connect(_on_main_menu_pressed)
@@ -74,6 +75,17 @@ func set_timer_visible(timer_visible: bool) -> void:
 
 func set_money(amount: int) -> void:
 	money_label.text = "%d" % amount
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_cancel"):
+		return
+	if pause_menu.visible:
+		get_viewport().set_input_as_handled()
+		_on_resume_pressed()
+	elif not get_tree().paused:
+		get_viewport().set_input_as_handled()
+		_on_pause_button_pressed()
 
 
 func _on_pause_button_pressed() -> void:

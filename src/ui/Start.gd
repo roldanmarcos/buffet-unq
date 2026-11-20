@@ -105,6 +105,13 @@ func _on_tutorial_pressed() -> void:
 	character_layer.show()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and (character_layer.visible or level_layer.visible):
+		get_viewport().set_input_as_handled()
+		click_sound.play()
+		_on_back_pressed()
+
+
 func _on_back_pressed() -> void:
 	tutorial_pending = false
 	level_layer.hide()
