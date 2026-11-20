@@ -66,7 +66,7 @@ scale = Vector2(0.5976563, 0.734024)
 texture = ExtResource("3_8ec3e")
 
 [node name="Unq" type="Sprite2D" parent="." unique_id=242392381]
-position = Vector2(434.85474, 87.34319)
+position = Vector2(434.85474, 67.34319)
 scale = Vector2(0.13473442, 0.12830257)
 texture = ExtResource("17_r7o8t")
 
@@ -206,6 +206,7 @@ scale = Vector2(0.07472426, 0.07652161)
 texture = ExtResource("19_7lugs")
 
 [node name="Cups" type="Sprite2D" parent="." unique_id=617749816]
+visible = false
 position = Vector2(153.46303, 164.99477)
 scale = Vector2(0.05018027, 0.046243653)
 texture = ExtResource("20_nsfgg")
