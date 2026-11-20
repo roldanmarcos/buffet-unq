@@ -12,7 +12,7 @@ const STEP_DELAY := 0.45
 @onready var arrow: Node2D = $Arrow
 @onready var message_panel: PanelContainer = $MessagePanel
 @onready var message_label: Label = $MessagePanel/Margin/VBox/Message
-@onready var hint_label: Label = $MessagePanel/Margin/VBox/Hint
+@onready var continue_badge: PanelContainer = $ContinueBadge
 
 var steps: Array = []
 var current := -1
@@ -21,6 +21,8 @@ var advancing := false
 var time := 0.0
 var spot_center := Vector2.ZERO
 var spot_strength := 0.0
+var badge_seen := false
+var badge_pulsing := false
 
 
 func _ready() -> void:
@@ -32,6 +34,7 @@ func start(new_steps: Array) -> void:
 	current = -1
 	running = true
 	spot_strength = 0.0
+	badge_seen = false
 	show()
 	_next_step()
 
@@ -47,7 +50,11 @@ func _next_step() -> void:
 	if step.has("on_start"):
 		step.on_start.call()
 	message_label.text = step.text
-	hint_label.visible = not step.has("done")
+	continue_badge.visible = not step.has("done")
+	if continue_badge.visible:
+		badge_pulsing = not badge_seen
+		badge_seen = true
+		continue_badge.scale = Vector2.ONE
 	var target = _target_position(step)
 	if target != null:
 		spot_center = target
@@ -64,6 +71,7 @@ func _process(delta: float) -> void:
 	if get_tree().paused:
 		return
 	time += delta
+	_update_continue_badge()
 	var step: Dictionary = steps[current]
 	var target = _target_position(step)
 	_update_highlight(step, target, delta)
@@ -82,6 +90,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
 		_next_step()
+
+
+func _update_continue_badge() -> void:
+	if not continue_badge.visible:
+		return
+	continue_badge.pivot_offset = continue_badge.size / 2.0
+	if badge_pulsing:
+		continue_badge.scale = Vector2.ONE * (1.0 + 0.06 * sin(time * 5.0))
+	continue_badge.position = message_panel.position + Vector2(
+		message_panel.size.x - continue_badge.size.x + 22.0,
+		message_panel.size.y - 6.0
+	)
 
 
 func _target_position(step: Dictionary) -> Variant:
