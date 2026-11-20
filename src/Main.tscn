@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bnopi1j4dpv2" path="res://src/ui/TutorialGuide.tscn" id="11_guide"]
 [ext_resource type="Texture2D" uid="uid://1vabjfo5ot85" path="res://assets/deco/plant.png" id="15_x08y8"]
 [ext_resource type="Texture2D" uid="uid://dbrtebkfoic87" path="res://assets/deco/pc.png" id="16_cj10r"]
+[ext_resource type="Texture2D" uid="uid://dx2ni11rb27g5" path="res://assets/deco/unq.png" id="17_r7o8t"]
+[ext_resource type="Texture2D" uid="uid://faqex16113br" path="res://assets/deco/notebook.png" id="19_7lugs"]
+[ext_resource type="Texture2D" uid="uid://cpquo8qtry178" path="res://assets/deco/cups.png" id="20_nsfgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6br"]
 size = Vector2(901.00006, 214.00024)
@@ -61,6 +64,11 @@ money_scene = ExtResource("3_insap")
 position = Vector2(460.00003, 272.1797)
 scale = Vector2(0.5976563, 0.734024)
 texture = ExtResource("3_8ec3e")
+
+[node name="Unq" type="Sprite2D" parent="." unique_id=242392381]
+position = Vector2(434.85474, 87.34319)
+scale = Vector2(0.13473442, 0.12830257)
+texture = ExtResource("17_r7o8t")
 
 [node name="Wall" type="StaticBody2D" parent="." unique_id=1739874771]
 position = Vector2(0, 37.999996)
@@ -191,3 +199,13 @@ mouse_filter = 2
 position = Vector2(73.37501, 392.37503)
 scale = Vector2(0.13549805, 0.13549805)
 texture = ExtResource("16_cj10r")
+
+[node name="Notebook" type="Sprite2D" parent="." unique_id=352812445]
+position = Vector2(359.00003, 442)
+scale = Vector2(0.07472426, 0.07652161)
+texture = ExtResource("19_7lugs")
+
+[node name="Cups" type="Sprite2D" parent="." unique_id=617749816]
+position = Vector2(153.46303, 164.99477)
+scale = Vector2(0.05018027, 0.046243653)
+texture = ExtResource("20_nsfgg")
